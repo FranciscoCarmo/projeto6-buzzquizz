@@ -1,11 +1,15 @@
 * {
     box-sizing: border-box;
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
-    
+
 }
 
 body {
     font-family: 'Roboto', sans-serif;
+}
+
+.caixa-quiz, button{
+    cursor: pointer
 }
 
 header {
@@ -13,7 +17,7 @@ header {
     height: 69px;
     width: 100%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin:0 auto;
+    margin: 0 auto;
 
 }
 
@@ -25,4 +29,106 @@ h1 {
     text-align: center;
     padding: 13px 0;
 
+}
+
+h2 {
+    margin-left: 111px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000
+}
+
+.todos-quizes {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1051px;
+    margin: 0 auto;
+
+}
+
+.caixa-quiz {
+    position: relative;
+    width: 340px;
+    height: 181px;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%), url();
+    border-radius: 5px;
+    margin: 12px 10px 12px 0px;
+}
+.caixa-imagem{
+    position: relative;
+}
+.imagem-quiz {
+    border-radius: 5px;
+    width: 340px;
+    height: 181px;
+    
+}
+.gradiente{
+    border-radius: 5px;
+    width: 340px;
+    height: 181px;
+    background:linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+    position: absolute;
+    top:0;left: 0;
+    
+}
+
+.titulo {
+    position: absolute;
+    bottom: 10px;
+    left: 17px;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #FFFFFF;
+    
+}
+
+.botao-criar-quiz {
+    width: 1051px;
+    height: 181px;
+    margin: 77px auto;
+    background: #FAFAFA;
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao-criar-quiz p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #B9B9B9;
+}
+
+.botao-criar-quiz button {
+    width: 151px;
+    height: 40px;
+    background: #FAFAFA;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #EC362D;
+}
+@media (max-width:1100px){
+    
+    .conteudo{
+        width: 100%;
+        margin: 0 auto;
+    }
+    .todos-quizes {
+        width: 340px;
+    }
+    .botao-criar-quiz{
+        width: 100%;
+    }
 }
