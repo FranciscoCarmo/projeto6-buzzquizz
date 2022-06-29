@@ -8,7 +8,8 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.caixa-quiz, button{
+.caixa-quiz,
+button {
     cursor: pointer
 }
 
@@ -55,23 +56,27 @@ h2 {
     border-radius: 5px;
     margin: 12px 10px 12px 0px;
 }
-.caixa-imagem{
+
+.caixa-imagem {
     position: relative;
 }
+
 .imagem-quiz {
     border-radius: 5px;
     width: 340px;
     height: 181px;
-    
+
 }
-.gradiente{
+
+.gradiente {
     border-radius: 5px;
     width: 340px;
     height: 181px;
-    background:linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
     position: absolute;
-    top:0;left: 0;
-    
+    top: 0;
+    left: 0;
+
 }
 
 .titulo {
@@ -82,7 +87,7 @@ h2 {
     font-size: 19px;
     line-height: 22px;
     color: #FFFFFF;
-    
+
 }
 
 .botao-criar-quiz {
@@ -119,16 +124,75 @@ h2 {
     text-align: center;
     color: #EC362D;
 }
-@media (max-width:1100px){
-    
-    .conteudo{
+
+@media (max-width:1100px) {
+
+    .conteudo {
         width: 100%;
         margin: 0 auto;
     }
+
     .todos-quizes {
         width: 340px;
     }
-    .botao-criar-quiz{
+
+    .botao-criar-quiz {
         width: 100%;
     }
+}
+
+/* layout pagina 2 */
+.titulo-quiz {
+    height: 227px;
+    position: relative;
+    top: 0px;
+    left: 0;
+    background-color: crimson;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-quiz p {
+    font-weight: 400;
+    font-size: 39px;
+    line-height: 46px;
+    color: #FFFFFF;
+    position: absolute;
+    z-index: 1;
+
+
+}
+
+.img-titulo {
+    width: 100%;
+    position: absolute;
+    height: 227px;
+    top: 0px;
+    left: 0;
+}
+
+.sombra {
+    width: 100%;
+    position: absolute;
+    height: 227px;
+    top: 0px;
+    left: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))
+}
+
+.caixa-pergunta {
+    width: 759px;
+    height: 676px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+}
+
+.pergunta {
+    width: 688.16px;
+    height: 137.99px;
+    background: #434CA0;
+    margin: 0 auto; 
+    
 }

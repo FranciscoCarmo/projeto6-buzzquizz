@@ -1,8 +1,7 @@
 let quizzes;
-let quizTemplate;
-let botaoCriar= document.querySelector('.botao-criar');
-let todosQuizes = document.querySelector('.quizes');
+let conteudo= document.querySelector('.conteudo');
 let idQuiz = [];
+let todosQuizes;
 
 quizzesDoUsuario();
 obterQuizz();
@@ -12,8 +11,9 @@ function quizzesDoUsuario() {
     const botaoTemplate = `<div class="botao-criar-quiz">
     <p>Você não criou nenhum <br> quizz ainda :(</p>
     <button onclick="">Criar Quizz</button>
-</div>`
-   botaoCriar.innerHTML += botaoTemplate;
+    </div><h2>Todos os Quizes</h2>
+    <div class="quizes"></div>`
+   conteudo.innerHTML += `${botaoTemplate}`;
 
 }
 
@@ -26,12 +26,12 @@ function obterQuizz() {
 function exibirQuizzes(resposta) {
     quizzes = {}
     quizzes = resposta.data;
-    console.log(quizzes)
+    todosQuizes = document.querySelector('.quizes');
 
     for (let i = 0; i < quizzes.length; i++) {
         idQuiz.push(quizzes[i].id) 
 
-        quizTemplate = `<div class = "caixa-quiz" onclick="localizarQuiz(${idQuiz[i]})">
+        const quizTemplate = `<div class = "caixa-quiz" onclick="localizarQuiz(${idQuiz[i]})">
         <div class="caixa-imagem">
         <img class ="imagem-quiz" src="${quizzes[i].image}" alt="">
         <div class="gradiente"></div></div>
@@ -53,7 +53,14 @@ function localizarQuiz(id) {
 
 }
 function abrirQuiz (resposta){
+
     const quiz = resposta.data;
     console.log(quiz);
+    const tituloQuiz = `<div class="titulo-quiz">
+    <p>${quiz.title}</p>
+    <img class="img-titulo" src="${quiz.image}" alt="">
+    <div class="sombra"></div></div>`
+
+    document.querySelector('.quiz-titulo').innerHTML += tituloQuiz;
 
 }
