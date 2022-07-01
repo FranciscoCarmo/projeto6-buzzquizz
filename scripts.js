@@ -79,7 +79,7 @@ function abrirQuiz(response) {
     let resposta = perguntas[j].answers;
 
     caixaPerguntastemplate = `<div class="caixa-pergunta fechada">
-        <div class="pergunta" style = "background-color: ${perguntas[j].color}">
+        <div class="perguntaCaixa" style = "background-color: ${perguntas[j].color}">
         ${perguntas[j].title}</div>`;
 
     for (let k = 0; k < resposta.length; k++) {
