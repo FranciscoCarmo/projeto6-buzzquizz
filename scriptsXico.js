@@ -38,7 +38,7 @@ function displayCriaInformacoesBasicas() {
 
   conteudo.innerHTML = `
     <div class="criacaoQuizz">
-    <h2><span>Comece pelo começo</span></h2>
+    <h2 class:><span>Comece pelo começo</span></h2>
 
     <div class="secaoForms">
       <input
@@ -479,10 +479,15 @@ function displaySucessoDoQuizz() {
     <button onclick="confereNiveis()">
          Acessa quizz
         </button>
-        <div class="caixaVoltarPraHome"><span class="voltarPraHome">Voltar pra home</span> </div>
+        <div class="caixaVoltarPraHome" onclick="voltarHome()"><span class="voltarPraHome">Voltar pra home</span> </div>
         </div>
       </div>
 </div>`;
+}
+
+function voltarHome() {
+  quizzesDoUsuario();
+  obterQuizz();
 }
 
 function isHexColor(hex) {

@@ -104,7 +104,6 @@ function abrirQuiz(response) {
   }
 }
 
-
 function embaralhar() {
   return Math.random() - 0.5;
 }
@@ -185,7 +184,7 @@ function exibirPontuacao() {
     <div class="titulo-level"><p>${acertos}% de acerto: ${level.title}</p></div>
     <div class = "caixa-level"> <div><img src="${level.image}" alt=""></div>
     <div> <p>${level.text}</p></div></div>
-    </div>`
+    </div>`;
 
   let posQuiz = `<div class="finalizar">
     <button class="reiniciar" onclick="localizarQuiz(${identificador})">
