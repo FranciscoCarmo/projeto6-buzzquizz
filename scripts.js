@@ -50,7 +50,7 @@ function exibirQuizzes(resposta) {
 
 function localizarQuiz(id) {
   conteudo.innerHTML = "";
-
+respostaCerta =0;
   const promise = axios.get(`${urlAPI}/${id}`)
   promise.then(abrirQuiz);
   identificador = id;
