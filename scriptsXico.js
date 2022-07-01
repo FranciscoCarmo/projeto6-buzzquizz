@@ -486,6 +486,8 @@ function displaySucessoDoQuizz() {
 }
 
 function voltarHome() {
+  conteudo.innerHTML = ``;
+
   quizzesDoUsuario();
   obterQuizz();
 }
