@@ -140,27 +140,27 @@ h2 {
   }
 
   .quizes {
-    width: 100%;
+    width: 95%;
     display: initial;
-  }
-
-  .todos-quizes {
-    width: 340px;
+    margin: 0 auto;
   }
 
   .botao-criar-quiz {
-    width: 340px;
+    width: 95%;
     height: 181px;
     margin: 33px auto;
   }
 
   .caixa-quiz {
-    margin: 13px auto 0 auto;
+    width: 95%;
+    margin: 13px auto;
   }
 
-  h2 {
-    margin-left: 330px;
+  .imagem-quiz,
+  .gradiente {
+    width: 100%;
   }
+
 }
 
 /* layout pagina 2 */
@@ -324,26 +324,27 @@ h2 {
   font-size: 21px;
   line-height: 25px;
   border: none;
-  color:#ffffff;
+  color: #ffffff;
 
 }
+
 .home {
   margin: 10px auto;
-   font-size: 21px;
+  font-size: 21px;
   line-height: 25px;
   color: #818181;
   background-color: #FFFFFF;
   border: none;
 
 }
- 
+
 
 @media (max-width:1100px) {
 
   .caixa-pergunta,
   .tela-level {
-    width: 375px;
-    
+    width: 95%;
+
 
   }
 
@@ -353,24 +354,26 @@ h2 {
   }
 
   .caixa-level div {
-    width: 340px;
+    width: 95%;
     height: 255px;
     margin: 10px auto;
   }
+
   .caixa-level p {
-        font-size: initial;
+    font-size: initial;
     line-height: initial;
     margin-bottom: 30px;
   }
+
   .caixa-level img {
-    width: 340px;
-    height: 255px;
+    width: 100%;
     
+
   }
 
   .perguntaCaixa,
   .titulo-level {
-    width: 340px;
+    width: 95%;
     height: 89px;
     font-weight: 700;
     font-size: 19px;
@@ -393,9 +396,8 @@ h2 {
   }
 
   .caixa-respostas {
-    width: 164px;
+    width: 95%;
     height: 113px;
-
 
   }
 
@@ -404,6 +406,7 @@ h2 {
     font-size: 13px;
     line-height: 15px;
   }
+
   .finalizar {
     margin: 50px;
   }
