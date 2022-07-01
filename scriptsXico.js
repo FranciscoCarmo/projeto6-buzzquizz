@@ -446,6 +446,8 @@ function confereNiveis() {
       quizz.levels.push({ ...level });
     }
 
+    enviaQuizzAPI();
+
     console.log(quizz);
   } else {
     alert("Por favor, preencha os dados corretamente.");
@@ -455,6 +457,32 @@ function confereNiveis() {
   console.log(acertoMinIsCorrect);
   console.log(acertoMinZeroIsCorrect);
   console.log(descricaoNivelIsCorrect);
+}
+
+function enviaQuizzAPI() {
+  let promisse = axios.post(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+    quizz
+  );
+
+  promisse.then(displaySucessoDoQuizz);
+}
+
+function displaySucessoDoQuizz() {
+  conteudo.innerHTML = `<div class="criacaoQuizz">
+    <h2><span>Seu quizz está pronto!</span></h2>
+    <div class="secaoToda">
+
+    <div class="imagemDoQuizz">
+    
+    </div>
+    <button onclick="confereNiveis()">
+         Acessa quizz
+        </button>
+        <div class="caixaVoltarPraHome"><span class="voltarPraHome">Voltar pra home</span> </div>
+        </div>
+      </div>
+</div>`;
 }
 
 function isHexColor(hex) {
@@ -472,7 +500,7 @@ function isHexColor(hex) {
 qtdPerguntasQuizz = 3;
 qtdNiveisQuizz = 2;
 
-displayCriaNiveis();
+displaySucessoDoQuizz();
 
 // Código real
 
