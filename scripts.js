@@ -49,11 +49,11 @@ function exibirQuizzes(resposta) {
 }
 
 function localizarQuiz(id) {
-    conteudo.innerHTML = "";
+  conteudo.innerHTML = "";
 
-    const promise = axios.get(`${urlAPI}/${id}`)
-    promise.then(abrirQuiz);
-    identificador=id;
+  const promise = axios.get(`${urlAPI}/${id}`)
+  promise.then(abrirQuiz);
+  identificador = id;
 }
 
 function abrirQuiz(response) {
@@ -84,9 +84,9 @@ function abrirQuiz(response) {
         <div class="pergunta" style = "background-color: ${perguntas[j].color}">
         ${perguntas[j].title}</div><div class = "container-respostas"> `
 
-        for (let k = 0; k < resposta.length; k++) {
-            if (resposta[k].isCorrectAnswer) {
-                caixaPerguntastemplate += `
+    for (let k = 0; k < resposta.length; k++) {
+      if (resposta[k].isCorrectAnswer) {
+        caixaPerguntastemplate += `
                 <div class="caixa-respostas certa" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
             <div class="resposta"><p>${resposta[k].text}<p></div></div>
@@ -95,22 +95,14 @@ function abrirQuiz(response) {
         caixaPerguntastemplate += `<div class="caixa-respostas" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
             <div class="resposta"><p>${resposta[k].text}<p></div></div>`
-            }
-
-
-        }
-
-        caixaPerguntastemplate += `</div></div>`
-
-        conteudo.innerHTML += caixaPerguntastemplate;
-
+      }
 
     }
-
-    caixaPerguntastemplate += `</div>`;
-
+    caixaPerguntastemplate += `</div></div>`
     conteudo.innerHTML += caixaPerguntastemplate;
+    setTimeout(perguntaSeguinte, 2000);
   }
+}
 
 
 function embaralhar() {
@@ -118,61 +110,48 @@ function embaralhar() {
 }
 
 function responder(elemento) {
- 
 
-    let caixaResposta = elemento.parentNode.parentNode;
-    let naoEscolhida = caixaResposta.querySelectorAll('.img-resposta');
+  let caixaResposta = elemento.parentNode.parentNode;
+  let naoEscolhida = caixaResposta.querySelectorAll('.img-resposta');
 
+  if (caixaResposta.classList.contains('fechada')) {
 
-
-    if (caixaResposta.classList.contains('fechada')) {
-
-        //Adicionando opacidade em todas menos a escolhida
-
-        for (let i = 0; i < naoEscolhida.length; i++) {
-            naoEscolhida[i].classList.add('branco');
-            elemento.classList.remove('branco')
-        }
-
-        // verificando se escolheu a opcao correta
-
-        if (elemento.classList.contains("certa")) {
-            respostaCerta++;
-            console.log(respostaCerta)
-        }
-
-        // impedindo de que o usuario mude a resposta
-        caixaResposta.classList.remove('fechada')
-        elemento.classList.add('selecionado');
+    //Adicionando opacidade em todas menos a escolhida
 
     for (let i = 0; i < naoEscolhida.length; i++) {
-      naoEscolhida[i].classList.add("branco");
-      elemento.classList.remove("branco");
+      naoEscolhida[i].classList.add('branco');
+      elemento.classList.remove('branco')
     }
 
     // verificando se escolheu a opcao correta
 
     if (elemento.classList.contains("certa")) {
       respostaCerta++;
-      console.log(respostaCerta);
+      console.log(respostaCerta)
     }
 
     // impedindo de que o usuario mude a resposta
-    caixaResposta.classList.remove("fechada");
-    elemento.classList.add("selecionado");
-  }
+    caixaResposta.classList.remove('fechada')
+    elemento.classList.add('selecionado');
 
-  // chamando a funcao que calcula os pontos
+    for (let i = 0; i < naoEscolhida.length; i++) {
+      naoEscolhida[i].classList.add("branco");
+      elemento.classList.remove("branco");
+    }
 
-  let finalizada = document.querySelectorAll(".fechada");
-  console.log(finalizada.length === 0);
-  if (finalizada.length === 0) {
-    calcularPontos();
-    setTimeout(function () {
-      document.querySelector(".tela-level").scrollIntoView();
-    }, 2000);
-  } else {
-    setTimeout(perguntaSeguinte, 2000);
+
+    // chamando a funcao que calcula os pontos
+
+    let finalizada = document.querySelectorAll(".fechada");
+    console.log(finalizada.length === 0);
+    if (finalizada.length === 0) {
+      calcularPontos();
+      setTimeout(function () {
+        document.querySelector(".tela-level").scrollIntoView();
+      }, 2000);
+    } else {
+      setTimeout(perguntaSeguinte, 2000);
+    }
   }
 }
 
@@ -184,6 +163,7 @@ function calcularPontos() {
   tamanhoQuiz = perguntas.length;
   acertos = Math.round((respostaCerta / tamanhoQuiz) * 100);
   console.log(acertos);
+  
 
   level = quiz.levels;
   level.sort((a, b) => b.minValue - a.minValue);
@@ -207,13 +187,14 @@ function exibirPontuacao() {
     <div> <p>${level.text}</p></div></div>
     </div>`
 
-    let posQuiz = `<div class="finalizar">
+  let posQuiz = `<div class="finalizar">
     <button class="reiniciar" onclick="localizarQuiz(${identificador})">
     <p>Reiniciar Quiz</p></button>
     <button class="home" onclick="voltarHome()"><p>Voltar para Home</p></button></div>`
-    conteudo.innerHTML += pontuacaoTemplate;
-    conteudo.innerHTML += posQuiz;
+  conteudo.innerHTML += pontuacaoTemplate;
+  conteudo.innerHTML += posQuiz;
 }
-function voltarHome (){
-    document.location.reload(true)
+
+function voltarHome() {
+  document.location.reload(true)
 }

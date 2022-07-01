@@ -1,11 +1,6 @@
 * {
-<<<<<<< HEAD
     box-sizing: border-box;
 
-=======
-  box-sizing: border-box;
-  @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap");
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
 }
 
 body {
@@ -18,7 +13,6 @@ button {
 }
 
 header {
-<<<<<<< HEAD
 
     background-color: #ec362d;
     height: 69px;
@@ -45,22 +39,6 @@ h1 {
     text-align: center;
     padding: 13px 0;
 
-=======
-  background-color: #ec362d;
-  height: 69px;
-  width: 100%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin: 0 auto;
-}
-
-h1 {
-  font-weight: 700;
-  font-size: 37px;
-  line-height: 43px;
-  color: #ffff;
-  text-align: center;
-  padding: 13px 0;
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
 }
 
 h2 {
@@ -180,7 +158,6 @@ h2 {
 
 /* layout pagina 2 */
 .titulo-quiz {
-<<<<<<< HEAD
     width: 100%;
     height: 227px;
     position: relative;
@@ -190,16 +167,6 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-=======
-  height: 227px;
-  position: relative;
-  top: 0px;
-  left: 0;
-  background-color: crimson;
-  display: flex;
-  align-items: center;
-  justify-content: center;
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
 }
 
 .titulo-quiz p {
@@ -220,7 +187,6 @@ h2 {
 }
 
 .sombra {
-<<<<<<< HEAD
     width: 100%;
     position: absolute;
     height: 227px;
@@ -236,24 +202,6 @@ h2 {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     margin: 42px auto 0 auto;
 
-=======
-  width: 100%;
-  position: absolute;
-  height: 227px;
-  top: 0px;
-  left: 0;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
-}
-
-.caixa-pergunta {
-  width: 759px;
-  height: 676px;
-  background: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-  margin: 42px auto 0 auto;
-  display: flex;
-  flex-wrap: wrap;
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
 }
 
 .pergunta {
@@ -278,7 +226,6 @@ h2 {
 }
 
 .caixa-respostas {
-<<<<<<< HEAD
     width: 329.91px;
     height: 175.2px;
     margin: 0 10px 60px 0;
@@ -289,16 +236,6 @@ h2 {
     width: 100%;
     height: 100%;
 
-=======
-  width: 329.91px;
-  height: 175.2px;
-  margin: 0 auto;
-}
-
-.img-resposta {
-  width: 100%;
-  height: 100%;
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
 }
 
 .resposta {
@@ -321,19 +258,11 @@ h2 {
 }
 
 .tela-level {
-<<<<<<< HEAD
     width: 759px;
     height: 430px;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     margin: 70px auto;
-=======
-  width: 759px;
-  height: 430px;
-  background: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-  margin: 0 auto;
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
 }
 
 .titulo-level {
@@ -353,13 +282,8 @@ h2 {
 }
 
 .caixa-level {
-<<<<<<< HEAD
     display: flex;
     margin: 18px auto 0 auto;
-=======
-  display: flex;
-  margin: 18px auto 0 auto;
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
 }
 
 .caixa-level img {
@@ -374,7 +298,6 @@ h2 {
   line-height: 25px;
   color: #484848;
 }
-<<<<<<< HEAD
 
 .finalizar {
     margin: 0 auto;
@@ -433,5 +356,3 @@ h2 {
         line-height: 15px;
     }
 }
-=======
->>>>>>> 4d5438128661ed400061c38eb9df3d4411bc145a
