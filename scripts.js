@@ -10,6 +10,7 @@ let acertos = 0;
 let perguntas;
 let quiz;
 let level;
+let identificador;
 
 quizzesDoUsuario();
 obterQuizz();
@@ -56,7 +57,7 @@ function localizarQuiz(id) {
 
     const promise = axios.get(`${urlAPI}/${id}`)
     promise.then(abrirQuiz);
-
+    identificador=id;
 }
 
 function abrirQuiz(response) {
@@ -89,11 +90,12 @@ function abrirQuiz(response) {
 
         caixaPerguntastemplate = `<div class="caixa-pergunta fechada">
         <div class="pergunta" style = "background-color: ${perguntas[j].color}">
-        ${perguntas[j].title}</div>`
+        ${perguntas[j].title}</div><div class = "container-respostas"> `
 
         for (let k = 0; k < resposta.length; k++) {
             if (resposta[k].isCorrectAnswer) {
-                caixaPerguntastemplate += `<div class="caixa-respostas certa" onclick="responder(this)" >
+                caixaPerguntastemplate += `
+                <div class="caixa-respostas certa" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
             <div class="resposta"><p>${resposta[k].text}<p></div></div>
             `
@@ -106,7 +108,7 @@ function abrirQuiz(response) {
 
         }
 
-        caixaPerguntastemplate += `</div>`
+        caixaPerguntastemplate += `</div></div>`
 
         conteudo.innerHTML += caixaPerguntastemplate;
 
@@ -122,7 +124,7 @@ function embaralhar() {
 
 function responder(elemento) {
 
-    let caixaResposta = elemento.parentNode;
+    let caixaResposta = elemento.parentNode.parentNode;
     let naoEscolhida = caixaResposta.querySelectorAll('.img-resposta');
 
 
@@ -197,5 +199,14 @@ function exibirPontuacao() {
     <div class = "caixa-level"> <div><img src="${level.image}" alt=""></div>
     <div> <p>${level.text}</p></div></div>
     </div>`
+
+    let posQuiz = `<div class="finalizar">
+    <button class="reiniciar" onclick="localizarQuiz(${identificador})">
+    <p>Reiniciar Quiz</p></button>
+    <button class="home" onclick="voltarHome()"><p>Voltar para Home</p></button></div>`
     conteudo.innerHTML += pontuacaoTemplate;
+    conteudo.innerHTML += posQuiz;
+}
+function voltarHome (){
+    document.location.reload(true)
 }
