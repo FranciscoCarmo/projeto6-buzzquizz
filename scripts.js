@@ -3,7 +3,14 @@ let conteudo = document.querySelector('.conteudo');
 let idQuiz = [];
 let todosQuizes;
 let caixaPerguntastemplate = "";
-let escolhido = null;
+let urlAPI = "https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes"
+let respostaCerta = 0;
+let tamanhoQuiz = 0;
+let acertos = 0;
+let perguntas;
+let quiz;
+let level;
+
 quizzesDoUsuario();
 obterQuizz();
 
@@ -19,7 +26,7 @@ function quizzesDoUsuario() {
 }
 
 function obterQuizz() {
-    const promise = axios.get('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes');
+    const promise = axios.get(`${urlAPI}`);
     promise.then(exibirQuizzes);
 
 }
@@ -47,15 +54,16 @@ function exibirQuizzes(resposta) {
 function localizarQuiz(id) {
     conteudo.innerHTML = "";
 
-    const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`)
+    const promise = axios.get(`${urlAPI}/${id}`)
     promise.then(abrirQuiz);
 
 }
 
 function abrirQuiz(response) {
 
-    const quiz = response.data;
-    const perguntas = quiz.questions;
+    quiz = response.data;
+    console.log(quiz)
+    perguntas = quiz.questions;
 
 
     /*  Gerando titulo do Quiz */
@@ -84,18 +92,25 @@ function abrirQuiz(response) {
         ${perguntas[j].title}</div>`
 
         for (let k = 0; k < resposta.length; k++) {
-            caixaPerguntastemplate += `<div class="caixa-respostas" onclick="responder(this)" >
+            if (resposta[k].isCorrectAnswer) {
+                caixaPerguntastemplate += `<div class="caixa-respostas certa" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
             <div class="resposta"><p>${resposta[k].text}<p></div></div>
             `
+            } else {
+                caixaPerguntastemplate += `<div class="caixa-respostas" onclick="responder(this)" >
+            <img class = "img-resposta" src="${resposta[k].image}"  alt="">
+            <div class="resposta"><p>${resposta[k].text}<p></div></div>`
+            }
+
 
         }
-        
+
         caixaPerguntastemplate += `</div>`
-        console.log(caixaPerguntastemplate)
+
         conteudo.innerHTML += caixaPerguntastemplate;
-       
-        
+
+
     }
 
 
@@ -103,32 +118,84 @@ function abrirQuiz(response) {
 
 function embaralhar() {
     return Math.random() - 0.5;
-} 
+}
 
 function responder(elemento) {
 
     let caixaResposta = elemento.parentNode;
     let naoEscolhida = caixaResposta.querySelectorAll('.img-resposta');
-    console.log(caixaResposta)
-    console.log(caixaResposta.classList.contains('fechada'))
+
 
 
     if (caixaResposta.classList.contains('fechada')) {
-       for (let i = 0; i < naoEscolhida.length; i++) {
+
+        //Adicionando opacidade em todas menos a escolhida
+
+        for (let i = 0; i < naoEscolhida.length; i++) {
             naoEscolhida[i].classList.add('branco');
             elemento.classList.remove('branco')
         }
 
+        // verificando se escolheu a opcao correta
+
+        if (elemento.classList.contains("certa")) {
+            respostaCerta++;
+            console.log(respostaCerta)
+        }
+
+        // impedindo de que o usuario mude a resposta
         caixaResposta.classList.remove('fechada')
-       
         elemento.classList.add('selecionado');
-        
 
-        escolhido = caixaResposta.querySelector('.selecionado');
+    }
 
+    // chamando a funcao que calcula os pontos
+    
+    let finalizada = document.querySelectorAll('.fechada');
+    console.log(finalizada.length === 0)
+    if (finalizada.length === 0) {
+        calcularPontos();
+        setTimeout(function () {
+            document.querySelector('.tela-level').scrollIntoView()
+        }, 2000);
+    } else {
+        setTimeout(perguntaSeguinte, 2000);
+    }
 
-        console.log(escolhido)
-    } 
+}
 
+function perguntaSeguinte() {
+    document.querySelector('.fechada').scrollIntoView();
+}
 
+function calcularPontos() {
+
+    tamanhoQuiz = perguntas.length;
+    acertos = Math.round((respostaCerta / tamanhoQuiz) * 100);
+    console.log(acertos)
+
+    level = quiz.levels;
+    level.sort((a, b) => b.minValue - a.minValue);
+
+    for (let i = 0; i < level.length; i++) {
+        if (acertos < level[i].minValue) {
+            level = level[i + 1]
+            console.log(level)
+            break;
+        }
+        level = level[i]
+        console.log(level)
+    }
+    exibirPontuacao()
+
+}
+
+function exibirPontuacao() {
+
+    let pontuacaoTemplate = `<div class = "tela-level">
+    <div class="titulo-level"><p>${acertos}% de acerto: ${level.title}</p></div>
+    <div class = "caixa-level"> <div><img src="${level.image}" alt=""></div>
+    <div> <p>${level.text}</p></div></div>
+    </div>`
+    conteudo.innerHTML += pontuacaoTemplate;
 }
