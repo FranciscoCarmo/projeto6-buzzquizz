@@ -1,5 +1,3 @@
-const conteudo = document.querySelector(".conteudo");
-
 let quizz = {
   title: "Título do quizz",
   image: "https://http.cat/411.jpg",
@@ -28,7 +26,7 @@ let umaResposta = {
   isCorrectAnswer: false,
 };
 
-let level = {
+let levelCriar = {
   title: "Título do nível 1",
   image: "https://http.cat/411.jpg",
   text: "Descrição do nível 1",
@@ -36,6 +34,8 @@ let level = {
 };
 
 function displayCriaInformacoesBasicas() {
+  console.log("entrei");
+
   conteudo.innerHTML = `
     <div class="criacaoQuizz">
     <h2><span>Comece pelo começo</span></h2>
@@ -431,17 +431,17 @@ function confereNiveis() {
     console.log("tudo Certinho");
 
     for (let i = 0; i < qtdNiveisQuizz; i++) {
-      level = {
+      levelCriar = {
         title: "Título do nível 1",
         image: "https://http.cat/411.jpg",
         text: "Descrição do nível 1",
         minValue: 0,
       };
 
-      level.title = tituloNivel[i].value;
-      level.image = urlImagemNivel[i].value;
-      level.text = descricaoNivel[i].value;
-      level.minValue = acertoMin[i].value;
+      levelCriar.title = tituloNivel[i].value;
+      levelCriar.image = urlImagemNivel[i].value;
+      levelCriar.text = descricaoNivel[i].value;
+      levelCriar.minValue = acertoMin[i].value;
 
       quizz.levels.push({ ...level });
     }
@@ -496,11 +496,6 @@ function isHexColor(hex) {
 }
 
 // Testeeeeee
-
-qtdPerguntasQuizz = 3;
-qtdNiveisQuizz = 2;
-
-displaySucessoDoQuizz();
 
 // Código real
 
