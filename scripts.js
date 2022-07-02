@@ -2,6 +2,7 @@ let quizzes;
 let conteudo = document.querySelector(".conteudo");
 let idQuiz = [];
 let todosQuizes;
+
 let caixaPerguntastemplate = "";
 let urlAPI = "https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes";
 let respostaCerta = 0;
@@ -21,10 +22,13 @@ function quizzesDoUsuario() {
     <button onclick="displayCriaInformacoesBasicas()">Criar Quizz</button>
     </div><h2>Todos os Quizes</h2>
     <div class="quizes"></div>`;
+
   conteudo.innerHTML += `${botaoTemplate}`;
 }
 
 function obterQuizz() {
+  todosQuizes = document.querySelector(".quizes");
+  todosQuizes.innerHTML = "";
   const promise = axios.get(`${urlAPI}`);
   promise.then(exibirQuizzes);
 }
@@ -32,7 +36,6 @@ function obterQuizz() {
 function exibirQuizzes(resposta) {
   quizzes = {};
   quizzes = resposta.data;
-  todosQuizes = document.querySelector(".quizes");
 
   for (let i = 0; i < quizzes.length; i++) {
     idQuiz.push(quizzes[i].id);
@@ -45,12 +48,13 @@ function exibirQuizzes(resposta) {
         `;
 
     todosQuizes.innerHTML += `${quizTemplate}`;
+
   }
 }
 
 function localizarQuiz(id) {
   conteudo.innerHTML = "";
-respostaCerta =0;
+  respostaCerta = 0;
   const promise = axios.get(`${urlAPI}/${id}`)
   promise.then(abrirQuiz);
   identificador = id;
@@ -58,7 +62,7 @@ respostaCerta =0;
 
 function abrirQuiz(response) {
   quiz = response.data;
-  console.log(quiz);
+  
   perguntas = quiz.questions;
 
   /*  Gerando titulo do Quiz */
@@ -85,7 +89,8 @@ function abrirQuiz(response) {
         ${perguntas[j].title}</div><div class = "container-respostas"> `
 
     for (let k = 0; k < resposta.length; k++) {
-      if (resposta[k].isCorrectAnswer) {
+      if (resposta[k].isCorrectAnswer === true) {
+        
         caixaPerguntastemplate += `
                 <div class="caixa-respostas certa" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
@@ -126,7 +131,7 @@ function responder(elemento) {
 
     if (elemento.classList.contains("certa")) {
       respostaCerta++;
-      console.log(respostaCerta)
+     
     }
 
     // impedindo de que o usuario mude a resposta
@@ -142,7 +147,7 @@ function responder(elemento) {
     // chamando a funcao que calcula os pontos
 
     let finalizada = document.querySelectorAll(".fechada");
-    console.log(finalizada.length === 0);
+    
     if (finalizada.length === 0) {
       calcularPontos();
       setTimeout(function () {
@@ -161,37 +166,45 @@ function perguntaSeguinte() {
 function calcularPontos() {
   tamanhoQuiz = perguntas.length;
   acertos = Math.round((respostaCerta / tamanhoQuiz) * 100);
-  console.log(acertos);
   
-
+  let controle = 0;
+  let indice = 0;
   level = quiz.levels;
-  level.sort((a, b) => b.minValue - a.minValue);
+
 
   for (let i = 0; i < level.length; i++) {
-    if (acertos < level[i].minValue) {
-      level = level[i + 1];
-      console.log(level);
-      break;
+    
+    let nivel = level[i].minValue;
+    
+    if (acertos >= nivel && nivel >= controle) {
+      controle = nivel;
+      indice = i;
+      
     }
-    level = level[i];
-    console.log(level);
+
   }
-  exibirPontuacao();
+  level = level[indice];
+ ;  exibirPontuacao();
 }
 
 function exibirPontuacao() {
   let pontuacaoTemplate = `<div class = "tela-level">
     <div class="titulo-level"><p>${acertos}% de acerto: ${level.title}</p></div>
     <div class = "caixa-level"> <div><img src="${level.image}" alt=""></div>
-    <div> <p>${level.text}</p></div></div>
+    <div class = "texto-level"> <p>${level.text}</p></div></div>
     </div>`;
 
   let posQuiz = `<div class="finalizar">
-    <button class="reiniciar" onclick="localizarQuiz(${identificador})">
+    <button class="reiniciar" onclick="reiniciarQuiz()">
     <p>Reiniciar Quiz</p></button>
     <button class="home" onclick="voltarHome()"><p>Voltar para Home</p></button></div>`
   conteudo.innerHTML += pontuacaoTemplate;
   conteudo.innerHTML += posQuiz;
+}
+
+function reiniciarQuiz() {
+  document.querySelector("header").scrollIntoView();
+  setTimeout(localizarQuiz(identificador), 1000)
 }
 
 function voltarHome() {
