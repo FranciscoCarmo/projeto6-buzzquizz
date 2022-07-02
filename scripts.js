@@ -20,14 +20,15 @@ function quizzesDoUsuario() {
   const botaoTemplate = `<div class="botao-criar-quiz">
     <p>Você não criou nenhum <br> quizz ainda :(</p>
     <button onclick="displayCriaInformacoesBasicas()">Criar Quizz</button>
-    </div><h2>Todos os Quizes</h2>
-    <div class="quizes"></div>`;
+    </div>
+    <div class="quizes"><h2>Todos os Quizes</h2>
+    <div class = "todos-quizes"></div></div>`;
 
   conteudo.innerHTML += `${botaoTemplate}`;
 }
 
 function obterQuizz() {
-  todosQuizes = document.querySelector(".quizes");
+  todosQuizes = document.querySelector(".todos-quizes");
   todosQuizes.innerHTML = "";
   const promise = axios.get(`${urlAPI}`);
   promise.then(exibirQuizzes);
@@ -44,12 +45,13 @@ function exibirQuizzes(resposta) {
         <div class="caixa-imagem">
         <img class ="imagem-quiz" src="${quizzes[i].image}" alt="">
         <div class="gradiente"></div></div>
-        <div class="titulo">${quizzes[i].title}</div></div>
+        <div class="titulo">${quizzes[i].title}</div>
         `;
 
     todosQuizes.innerHTML += `${quizTemplate}`;
 
   }
+  todosQuizes.innerHTML += `</div></div>`
 }
 
 function localizarQuiz(id) {
