@@ -317,14 +317,14 @@ function conferePerguntas() {
     // Passa para a pagina niveis
 
     console.log(quizz);
-    //displayCriaNiveis();
+    displayCriaNiveis();
   } else {
     //TESTE
-    // console.log("Teste");
-    // console.log(textoIsCorrect);
-    // console.log(corIsCorrect);
-    // console.log(respostaCorretaIsCorrect);
-    // console.log(respostaIncorretaIsCorrect);
+    console.log("Teste");
+    console.log(textoIsCorrect);
+    console.log(corIsCorrect);
+    console.log(respostaCorretaIsCorrect);
+    console.log(respostaIncorretaIsCorrect);
 
     alert("Por favor, preencha os dados corretamente.");
   }
@@ -442,8 +442,8 @@ function confereNiveis() {
       levelCriar.image = urlImagemNivel[i].value;
       levelCriar.text = descricaoNivel[i].value;
       levelCriar.minValue = acertoMin[i].value;
-
-      quizz.levels.push({ ...level });
+      
+      quizz.levels.push({ ...levelCriar });
     }
 
     enviaQuizzAPI();
@@ -461,7 +461,7 @@ function confereNiveis() {
 
 function enviaQuizzAPI() {
   let promisse = axios.post(
-    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+    "https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes",
     quizz
   );
 
@@ -476,7 +476,7 @@ function displaySucessoDoQuizz() {
     <div class="imagemDoQuizz">
     
     </div>
-    <button onclick="confereNiveis()">
+    <button onclick="localizarQuiz(${quiz.id})">
          Acessa quizz
         </button>
         <div class="caixaVoltarPraHome" onclick="voltarHome()"><span class="voltarPraHome">Voltar pra home</span> </div>

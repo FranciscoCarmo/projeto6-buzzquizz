@@ -4,7 +4,7 @@ let idQuiz = [];
 let todosQuizes;
 
 let caixaPerguntastemplate = "";
-let urlAPI = "https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes";
+let urlAPI = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
 let respostaCerta = 0;
 let tamanhoQuiz = 0;
 let acertos = 0;
