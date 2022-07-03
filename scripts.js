@@ -4,7 +4,7 @@ let idQuiz = [];
 let todosQuizes;
 
 let caixaPerguntastemplate = "";
-let urlAPI = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
+let urlAPI = "https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes";
 let respostaCerta = 0;
 let tamanhoQuiz = 0;
 let acertos = 0;
@@ -12,19 +12,59 @@ let perguntas;
 let quiz;
 let level;
 let identificador;
+let userQuiz= localStorage.getItem("quizzesDoUsuario");
+let arrayUsuario = [];
 
 quizzesDoUsuario();
-obterQuizz();
+
 
 function quizzesDoUsuario() {
-  const botaoTemplate = `<div class="botao-criar-quiz">
+  console.log(userQuiz)
+  let listaUsuario = JSON.parse (userQuiz);
+  console.log(listaUsuario)
+  if (userQuiz===null) {
+    let botaoTemplate = `<div class="botao-criar-quiz">
     <p>Você não criou nenhum <br> quizz ainda :(</p>
     <button onclick="displayCriaInformacoesBasicas()">Criar Quizz</button>
     </div>
     <div class="quizes"><h2>Todos os Quizes</h2>
     <div class = "todos-quizes"></div></div>`;
+    conteudo.innerHTML += `${botaoTemplate}`;
+    obterQuizz();
+  }
+  for (let i =0; i< listaUsuario.length; i++){
+   let  promise = axios.get(`${urlAPI}/${listaUsuario[i]}`);
+   promise.then(listarQuizzesUsuario)
+  }
 
+
+  
+}
+function listarQuizzesUsuario (resposta){
+ 
+  arrayUsuario.push(resposta.data)
+  console.log(arrayUsuario);
+  for (let i=0; i<arrayUsuario.length; i++){
+    let botaoTemplate =   `<div class="lista-usuario">
+    <button onclick="displayCriaInformacoesBasicas()">Criar Quizz</button>
+  
+  <div class="quiz-usuario">
+    <div class="caixa-quiz" onclick="localizarQuiz(${arrayUsuario[i].id})">
+      <div class="caixa-imagem">
+        <img class="imagem-quiz" src="${arrayUsuario[i].image}" alt="">
+        <div class="gradiente"></div>
+      </div>
+      <div class="titulo">${arrayUsuario[i].title}</div>
+    </div>
+  `
   conteudo.innerHTML += `${botaoTemplate}`;
+  }
+  conteudo.innerHTML+= `</div></div>
+  <div class="quizes">
+    <h2>Todos os Quizes</h2>
+    <div class="todos-quizes"></div>
+  </div>`;
+  obterQuizz();
 }
 
 function obterQuizz() {
@@ -64,7 +104,7 @@ function localizarQuiz(id) {
 
 function abrirQuiz(response) {
   quiz = response.data;
-  
+
   perguntas = quiz.questions;
 
   /*  Gerando titulo do Quiz */
@@ -92,7 +132,7 @@ function abrirQuiz(response) {
 
     for (let k = 0; k < resposta.length; k++) {
       if (resposta[k].isCorrectAnswer === true) {
-        
+
         caixaPerguntastemplate += `
                 <div class="caixa-respostas certa" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
@@ -133,7 +173,7 @@ function responder(elemento) {
 
     if (elemento.classList.contains("certa")) {
       respostaCerta++;
-     
+
     }
 
     // impedindo de que o usuario mude a resposta
@@ -149,7 +189,7 @@ function responder(elemento) {
     // chamando a funcao que calcula os pontos
 
     let finalizada = document.querySelectorAll(".fechada");
-    
+
     if (finalizada.length === 0) {
       calcularPontos();
       setTimeout(function () {
@@ -168,25 +208,25 @@ function perguntaSeguinte() {
 function calcularPontos() {
   tamanhoQuiz = perguntas.length;
   acertos = Math.round((respostaCerta / tamanhoQuiz) * 100);
-  
+
   let controle = 0;
   let indice = 0;
   level = quiz.levels;
 
 
   for (let i = 0; i < level.length; i++) {
-    
+
     let nivel = level[i].minValue;
-    
+
     if (acertos >= nivel && nivel >= controle) {
       controle = nivel;
       indice = i;
-      
+
     }
 
   }
-  level = level[indice];
- ;  exibirPontuacao();
+  level = level[indice];;
+  exibirPontuacao();
 }
 
 function exibirPontuacao() {

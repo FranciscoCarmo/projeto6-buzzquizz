@@ -11,13 +11,11 @@ let qtdNiveisQuizz = 0;
 let pergunta = {
   title: "Título da pergunta 1",
   color: "#123456",
-  answers: [
-    {
-      text: "Texto da resposta 1",
-      image: "https://http.cat/411.jpg",
-      isCorrectAnswer: true,
-    },
-  ],
+  answers: [{
+    text: "Texto da resposta 1",
+    image: "https://http.cat/411.jpg",
+    isCorrectAnswer: true,
+  }, ],
 };
 
 let umaResposta = {
@@ -32,6 +30,8 @@ let levelCriar = {
   text: "Descrição do nível 1",
   minValue: 0,
 };
+
+let idUsuario;
 
 function displayCriaInformacoesBasicas() {
   console.log("entrei");
@@ -271,13 +271,11 @@ function conferePerguntas() {
       pergunta = {
         title: "Título da pergunta 1",
         color: "#123456",
-        answers: [
-          {
-            text: "Texto da resposta 1",
-            image: "https://http.cat/411.jpg",
-            isCorrectAnswer: true,
-          },
-        ],
+        answers: [{
+          text: "Texto da resposta 1",
+          image: "https://http.cat/411.jpg",
+          isCorrectAnswer: true,
+        }, ],
       };
 
       umaResposta = {
@@ -307,11 +305,15 @@ function conferePerguntas() {
 
           console.log("objeto resposta  --" + umaResposta.text);
 
-          pergunta.answers.push({ ...umaResposta });
+          pergunta.answers.push({
+            ...umaResposta
+          });
         }
       }
 
-      quizz.questions.push({ ...pergunta });
+      quizz.questions.push({
+        ...pergunta
+      });
     }
 
     // Passa para a pagina niveis
@@ -442,8 +444,10 @@ function confereNiveis() {
       levelCriar.image = urlImagemNivel[i].value;
       levelCriar.text = descricaoNivel[i].value;
       levelCriar.minValue = acertoMin[i].value;
-      
-      quizz.levels.push({ ...levelCriar });
+
+      quizz.levels.push({
+        ...levelCriar
+      });
     }
 
     enviaQuizzAPI();
@@ -465,10 +469,34 @@ function enviaQuizzAPI() {
     quizz
   );
 
-  promisse.then(displaySucessoDoQuizz);
+  promisse.then(guardarQuizUsuario);
 }
 
-function displaySucessoDoQuizz() {
+
+
+
+
+function guardarQuizUsuario(resposta) {
+
+  if (verificarQuizDoUsuario().length === 0) {
+    idUsuario = JSON.stringify([resposta]);
+    localStorage.setItem("quizUsuario", idUsuario);
+  } else {
+    idUsuario = verificarQuizDoUsuario();
+    idUsuario.push(resposta);
+    localStorage.setItem("quizUsuario", JSON.stringify(idUsuario));
+  }
+  displaySucessoDoQuizz((resposta.data.id))
+}
+
+function verificarQuizDoUsuario() {
+  if (!localStorage.getItem("quizDoUsuario")) {
+    return [];
+  }
+  return JSON.parse(localStorage.getItem("quizDoUsuario"));
+}
+
+function displaySucessoDoQuizz(id) {
   conteudo.innerHTML = `<div class="criacaoQuizz">
     <h2><span>Seu quizz está pronto!</span></h2>
     <div class="secaoToda">
@@ -476,13 +504,15 @@ function displaySucessoDoQuizz() {
     <div class="imagemDoQuizz">
     
     </div>
-    <button onclick="localizarQuiz(${quiz.id})">
+    <button onclick="localizarQuiz(${id})">
          Acessa quizz
         </button>
         <div class="caixaVoltarPraHome" onclick="voltarHome()"><span class="voltarPraHome">Voltar pra home</span> </div>
         </div>
       </div>
 </div>`;
+
+
 }
 
 function voltarHome() {
