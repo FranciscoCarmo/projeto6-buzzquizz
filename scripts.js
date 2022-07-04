@@ -21,7 +21,6 @@ let play;
 
 quizzesDoUsuario();
 
-
 function quizzesDoUsuario() {
   conteudo.innerHTML = `<div class = "play"></div>`;
 
@@ -40,7 +39,7 @@ function quizzesDoUsuario() {
 
   for (let i = 0; i < listaUsuario.length; i++) {
     let promise = axios.get(`${urlAPI}/${listaUsuario[i].data.id}`);
-    promise.then(criarArrayUsario)
+    promise.then(criarArrayUsario);
   }
 
   botaoTemplate = `<div class="lista">
@@ -52,15 +51,14 @@ function quizzesDoUsuario() {
 }
 
 function criarArrayUsario(resposta) {
-  arrayUsuario.push(resposta.data)
+  arrayUsuario.push(resposta.data);
   if (arrayUsuario.length === listaUsuario.length) {
-    listarQuizzesUsuario()
+    listarQuizzesUsuario();
   }
 }
 
 function listarQuizzesUsuario() {
-
-  user = document.querySelector('.lista-usuario');
+  user = document.querySelector(".lista-usuario");
 
   for (let i = 0; i < arrayUsuario.length; i++) {
     let usuarioTemplate = `
@@ -72,7 +70,7 @@ function listarQuizzesUsuario() {
       </div>
       <div class="titulo">${arrayUsuario[i].title}</div>
     </div>
-  `
+  `;
 
     user.innerHTML += `${usuarioTemplate}`;
   }
@@ -96,7 +94,6 @@ function verificarQuizzes(resposta) {
   quizzes = resposta.data;
 
   for (let i = 0; i < quizzes.length; i++) {
-
     let repetido = false;
 
     for (let j = 0; j < arrayUsuario.length; j++) {
@@ -111,9 +108,6 @@ function verificarQuizzes(resposta) {
 }
 
 function exibirQuizz(quizzesGerais) {
-
-
-
   const quizTemplate = `<div class = "caixa-quiz" onclick="localizarQuiz(${quizzesGerais.id})">
         <div class="caixa-imagem">
         <img class ="imagem-quiz" src="${quizzesGerais.image}" alt="">
@@ -123,16 +117,12 @@ function exibirQuizz(quizzesGerais) {
 
   todosQuizes.innerHTML += `${quizTemplate}`;
 
-
-  todosQuizes.innerHTML += `</div></div>`
+  todosQuizes.innerHTML += `</div></div>`;
 }
 
-
-
 function varreAPI() {
-
   for (let i = 0; i < quizzes.length; i++) {
-    quizzes.id !== 711
+    quizzes.id !== 711;
     return quizzes;
   }
 }
@@ -140,7 +130,7 @@ function varreAPI() {
 function localizarQuiz(id) {
   conteudo.innerHTML = "";
   respostaCerta = 0;
-  const promise = axios.get(`${urlAPI}/${id}`)
+  const promise = axios.get(`${urlAPI}/${id}`);
   promise.then(abrirQuiz);
   identificador = id;
 }
@@ -172,11 +162,10 @@ function abrirQuiz(response) {
 
     caixaPerguntastemplate = `<div class="caixa-pergunta fechada">
         <div class="perguntaCaixa" style = "background-color: ${perguntas[j].color}">
-        ${perguntas[j].title}</div><div class = "container-respostas"> `
+        ${perguntas[j].title}</div><div class = "container-respostas"> `;
 
     for (let k = 0; k < resposta.length; k++) {
       if (resposta[k].isCorrectAnswer === true) {
-
         caixaPerguntastemplate += `
                 <div class="caixa-respostas certa" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
@@ -185,9 +174,8 @@ function abrirQuiz(response) {
       } else {
         caixaPerguntastemplate += `<div class="caixa-respostas" onclick="responder(this)" >
             <img class = "img-resposta" src="${resposta[k].image}"  alt="">
-            <div class="resposta"><p>${resposta[k].text}<p></div></div>`
+            <div class="resposta"><p>${resposta[k].text}<p></div></div>`;
       }
-
     }
     caixaPerguntastemplate += `</div></div>`
     document.querySelector('.play').innerHTML += caixaPerguntastemplate;
@@ -201,35 +189,31 @@ function embaralhar() {
 }
 
 function responder(elemento) {
-
   let caixaResposta = elemento.parentNode.parentNode;
-  let naoEscolhida = caixaResposta.querySelectorAll('.img-resposta');
+  let naoEscolhida = caixaResposta.querySelectorAll(".img-resposta");
 
-  if (caixaResposta.classList.contains('fechada')) {
-
+  if (caixaResposta.classList.contains("fechada")) {
     //Adicionando opacidade em todas menos a escolhida
-
-    for (let i = 0; i < naoEscolhida.length; i++) {
-      naoEscolhida[i].classList.add('branco');
-      elemento.classList.remove('branco')
-    }
-
-    // verificando se escolheu a opcao correta
-
-    if (elemento.classList.contains("certa")) {
-      respostaCerta++;
-
-    }
-
-    // impedindo de que o usuario mude a resposta
-    caixaResposta.classList.remove('fechada')
-    elemento.classList.add('selecionado');
 
     for (let i = 0; i < naoEscolhida.length; i++) {
       naoEscolhida[i].classList.add("branco");
       elemento.classList.remove("branco");
     }
 
+    // verificando se escolheu a opcao correta
+
+    if (elemento.classList.contains("certa")) {
+      respostaCerta++;
+    }
+
+    // impedindo de que o usuario mude a resposta
+    caixaResposta.classList.remove("fechada");
+    elemento.classList.add("selecionado");
+
+    for (let i = 0; i < naoEscolhida.length; i++) {
+      naoEscolhida[i].classList.add("branco");
+      elemento.classList.remove("branco");
+    }
 
     // chamando a funcao que calcula os pontos
 
@@ -247,7 +231,9 @@ function responder(elemento) {
 }
 
 function perguntaSeguinte() {
-  document.querySelector(".fechada").scrollIntoView();
+  if (document.querySelector(".fechada")) {
+    document.querySelector(".fechada").scrollIntoView();
+  }
 }
 
 function calcularPontos() {
@@ -258,19 +244,15 @@ function calcularPontos() {
   let indice = 0;
   level = quiz.levels;
 
-
   for (let i = 0; i < level.length; i++) {
-
     let nivel = level[i].minValue;
 
     if (acertos >= nivel && nivel >= controle) {
       controle = nivel;
       indice = i;
-
     }
-
   }
-  level = level[indice];;
+  level = level[indice];
   exibirPontuacao();
 }
 
@@ -284,12 +266,12 @@ function exibirPontuacao() {
   let posQuiz = `<div class="finalizar">
     <button class="reiniciar" onclick="reiniciarQuiz()">
     <p>Reiniciar Quiz</p></button>
-    <button class="home" onclick="voltarHome()"><p>Voltar para Home</p></button></div>`
+    <button class="home" onclick="voltarHome()"><p>Voltar para Home</p></button></div>`;
   conteudo.innerHTML += pontuacaoTemplate;
   conteudo.innerHTML += posQuiz;
 }
 
 function reiniciarQuiz() {
   document.querySelector("header").scrollIntoView();
-  setTimeout(localizarQuiz(identificador), 1000)
+  setTimeout(localizarQuiz(identificador), 1000);
 }
