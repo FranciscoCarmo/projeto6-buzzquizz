@@ -227,7 +227,9 @@ function responder(elemento) {
 }
 
 function perguntaSeguinte() {
-  document.querySelector(".fechada").scrollIntoView();
+  if (document.querySelector(".fechada")) {
+    document.querySelector(".fechada").scrollIntoView();
+  }
 }
 
 function calcularPontos() {

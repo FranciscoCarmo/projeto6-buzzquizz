@@ -66,7 +66,7 @@ h1:hover {
 }
 
 .quizes,
-.lista{
+.lista {
   width: 1051px;
   margin: 0 auto;
 }
@@ -169,6 +169,11 @@ h1:hover {
     margin-top: 70px;
     display: flex;
     flex-direction: column;
+  }
+
+  .lista {
+    width: 375px;
+    margin: 0 auto;
   }
 
   .quizes {
