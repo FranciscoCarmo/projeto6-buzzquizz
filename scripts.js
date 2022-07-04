@@ -14,13 +14,16 @@ let level;
 let identificador;
 let userQuiz = localStorage.getItem("quizUsuario");
 let arrayUsuario = [];
+let botaoTemplate;
+let user;
+let listaUsuario;
 
 quizzesDoUsuario();
 
 function quizzesDoUsuario() {
   conteudo.innerHTML = "";
 
-  let listaUsuario = JSON.parse(userQuiz);
+  listaUsuario = JSON.parse(userQuiz);
 
   if (userQuiz === null) {
     let botaoTemplate = `<div class="botao-criar-quiz">
@@ -35,19 +38,29 @@ function quizzesDoUsuario() {
 
   for (let i = 0; i < listaUsuario.length; i++) {
     let promise = axios.get(`${urlAPI}/${listaUsuario[i].data.id}`);
-    promise.then(listarQuizzesUsuario);
+    promise.then(criarArrayUsario);
+  }
+
+  botaoTemplate = `<div class="lista">
+  <div class ="topo-quizes-user"> <h3>Seus Quizes</h3>
+  <ion-icon name="add-circle" onclick="displayCriaInformacoesBasicas()">
+  </ion-icon></div><div class="lista-usuario">`;
+  conteudo.innerHTML = `${botaoTemplate}`;
+}
+
+function criarArrayUsario(resposta) {
+  arrayUsuario.push(resposta.data);
+  if (arrayUsuario.length === listaUsuario.length) {
+    listarQuizzesUsuario();
   }
 }
 
-function listarQuizzesUsuario(resposta) {
-  arrayUsuario.push(resposta.data);
-  console.log(arrayUsuario);
+function listarQuizzesUsuario() {
+  user = document.querySelector(".lista-usuario");
+
   for (let i = 0; i < arrayUsuario.length; i++) {
-    let botaoTemplate = `<div class="lista-usuario">
-   <div class ="topo-quizes-user"> <h3>Seus Quizes</h3>
-   <ion-icon onclick="displayCriaInformacoesBasicas()" name="add-circle" ></ion-icon></div>
-  
-  <div class="quiz-usuario">
+    let usuarioTemplate = `
+    <div class="quiz-usuario">
     <div class="caixa-quiz" onclick="localizarQuiz(${arrayUsuario[i].id})">
       <div class="caixa-imagem">
         <img class="imagem-quiz" src="${arrayUsuario[i].image}" alt="">
@@ -56,9 +69,10 @@ function listarQuizzesUsuario(resposta) {
       <div class="titulo">${arrayUsuario[i].title}</div>
     </div>
   `;
-    conteudo.innerHTML += `${botaoTemplate}`;
+
+    user.innerHTML += `${usuarioTemplate}`;
   }
-  conteudo.innerHTML += `</div></div>
+  conteudo.innerHTML += `</div></div></div>
   <div class="quizes">
     <h2>Todos os Quizes</h2>
     <div class="todos-quizes"></div>
@@ -70,31 +84,44 @@ function obterQuizz() {
   todosQuizes = document.querySelector(".todos-quizes");
   todosQuizes.innerHTML = "";
   const promise = axios.get(`${urlAPI}`);
-  promise.then(exibirQuizzes);
+  promise.then(verificarQuizzes);
 }
 
-function exibirQuizzes(resposta) {
+function verificarQuizzes(resposta) {
   quizzes = {};
   quizzes = resposta.data;
 
   for (let i = 0; i < quizzes.length; i++) {
-    idQuiz.push(quizzes[i].id);
+    let repetido = false;
 
-    const quizTemplate = `<div class = "caixa-quiz" onclick="localizarQuiz(${idQuiz[i]})">
+    for (let j = 0; j < arrayUsuario.length; j++) {
+      if (quizzes[i].id === arrayUsuario[j].id) {
+        repetido = true;
+      }
+    }
+    if (!repetido) {
+      exibirQuizz(quizzes[i]);
+    }
+  }
+}
+
+function exibirQuizz(quizzesGerais) {
+  const quizTemplate = `<div class = "caixa-quiz" onclick="localizarQuiz(${quizzesGerais.id})">
         <div class="caixa-imagem">
-        <img class ="imagem-quiz" src="${quizzes[i].image}" alt="">
+        <img class ="imagem-quiz" src="${quizzesGerais.image}" alt="">
         <div class="gradiente"></div></div>
-        <div class="titulo">${quizzes[i].title}</div>
+        <div class="titulo">${quizzesGerais.title}</div>
         `;
 
-    todosQuizes.innerHTML += `${quizTemplate}`;
-  }
+  todosQuizes.innerHTML += `${quizTemplate}`;
+
   todosQuizes.innerHTML += `</div></div>`;
 }
 
 function varreAPI() {
   for (let i = 0; i < quizzes.length; i++) {
-    quizzes;
+    quizzes.id !== 711;
+    return quizzes;
   }
 }
 

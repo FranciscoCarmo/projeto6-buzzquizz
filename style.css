@@ -66,12 +66,13 @@ h1:hover {
 }
 
 .quizes,
-.lista-usuario {
+.lista{
   width: 1051px;
   margin: 0 auto;
 }
 
-.todos-quizes {
+.todos-quizes,
+.lista-usuario {
   display: flex;
   flex-wrap: wrap;
 }
@@ -476,11 +477,13 @@ h1:hover {
   .finalizar {
     margin: 50px;
   }
+
   .lista-usuario {
     width: 100%;
     display: initial;
     margin: 0px auto;
   }
+
   .topo-quizes-user {
     display: flex;
     justify-content: space-between;
