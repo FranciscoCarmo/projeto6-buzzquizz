@@ -20,7 +20,7 @@ header {
   position: fixed;
   top: 0px;
 
-  z-index: 1;
+  z-index: 5;
 }
 
 h1 {
@@ -214,6 +214,7 @@ h1:hover {
   width: 100%;
   height: 227px;
   position: relative;
+  margin-top: 77px;
   top: 0px;
   left: 0;
   background-color: crimson;
@@ -230,6 +231,7 @@ h1:hover {
   position: absolute;
   z-index: 1;
   width: 80%;
+
   text-align: center;
 }
 
@@ -322,11 +324,12 @@ h1:hover {
 
 .tela-level {
   width: 759px;
-  height: 430px;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   margin: 70px auto;
   word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
 }
 
 .titulo-level {
@@ -336,6 +339,7 @@ h1:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .titulo-level p {
@@ -347,6 +351,7 @@ h1:hover {
 
 .caixa-level {
   display: flex;
+  flex-direction: column;
   margin: 18px auto 0 auto;
 }
 

@@ -43,6 +43,7 @@
   border: solid 2px #d1d1d1;
   border-radius: 5px;
   padding-left: 10px;
+  padding-top: 0;
 }
 
 .criacaoQuizz input::placeholder {
@@ -51,7 +52,6 @@
   font-size: 19px;
 
   text-align: left;
-  text-justify: center;
 }
 
 .criacaoQuizz button {
@@ -78,6 +78,12 @@
   padding: 15px 15px;
 
   max-width: 600px;
+}
+
+.secaoToda .caixaQuizz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .unidadePergunta {
@@ -162,17 +168,29 @@
   display: block;
 }
 
-.criacaoQuizz .descricaoNivel input {
-  height: 177px;
+.descricaoNivel {
+  display: block;
+  height: 177px !important;
 }
 
 .hidden {
   display: none;
 }
 
-@media (max-width: 1100px) {
-  .criacaoQuizz h2 {
-    font-size: 23px;
+@media (min-width: 1100px) {
+  .criacaoQuizz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comeceDoComeco {
+    margin-top: 70px;
+    font-size: 23px !important;
+    display: flex !important;
+    align-self: center;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .criacaoQuizz input {

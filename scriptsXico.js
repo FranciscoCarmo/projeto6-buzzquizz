@@ -40,7 +40,7 @@ function displayCriaInformacoesBasicas() {
 
   conteudo.innerHTML = `
     <div class="criacaoQuizz">
-    <h2> Comece pelo começo</h2>
+    <h2 class="comeceDoComeco"> Comece pelo começo</h2>
 
     <div class="secaoForms">
       <input
@@ -88,7 +88,7 @@ function confereInformacoesBasicasEAdicionaNoObjetoQuizz() {
   let TitleIsCorrect = tituloQuizz.length > 19 && tituloQuizz.length < 66;
   let urlIsCorrect = ValidURL(urlImagemQuizz);
   let qtdPerguntasIsCorrect = qtdPerguntasQuizz >= 3;
-  let qtdNiveisIsCorrect = qtdNiveisQuizz > 1;
+  let qtdNiveisIsCorrect = qtdNiveisQuizz >= 2;
 
   if (
     TitleIsCorrect &&
@@ -259,13 +259,42 @@ function conferePerguntas() {
       console.log("Resposta" + respostaIncorreta[i].value);
       respostaIncorretaIsCorrect = false;
     }
-  } //Confere apenas a primeira resposta incorreta
+  }
+
+  //   for (let i = 0; i < respostaIncorreta.length / 3; i++) {
+  //     let temRespostaIncorreta = false;
+  //     for (let j = 0; j < 3; j++) {
+  //       if (respostaIncorreta[i * 3 + j].value !== "") {
+  //         temRespostaIncorreta = true;
+  //       }
+  //     }
+  //     if (!temRespostaIncorreta) respostaIncorretaIsCorrect = false;
+  //   }
+  //Confere apenas a primeira resposta incorreta
+
+  // Confere a url
+  let urlCorretaIsCorrect = true;
+  let urlIncorretaIsCorrect = true;
+
+  for (let i = 0; i < urlCorreta.length; i++) {
+    if (ValidURL(urlCorreta[i].value) == false) urlCorretaIsCorrect = false;
+  }
+
+  for (let i = 0; i < urlIncorreta.length; i++) {
+    if (
+      respostaIncorreta[i].value !== "" &&
+      ValidURL(urlIncorreta[i].value) == false
+    )
+      urlIncorretaIsCorrect = false;
+  }
 
   if (
     textoIsCorrect &&
     corIsCorrect &&
     respostaCorretaIsCorrect &&
-    respostaIncorretaIsCorrect
+    respostaIncorretaIsCorrect &&
+    urlCorretaIsCorrect &&
+    urlIncorretaIsCorrect
   ) {
     // Adiciona ao objeto pergunta
 
@@ -331,6 +360,8 @@ function conferePerguntas() {
     console.log(corIsCorrect);
     console.log(respostaCorretaIsCorrect);
     console.log(respostaIncorretaIsCorrect);
+    console.log(urlCorretaIsCorrect);
+    console.log(urlIncorretaIsCorrect);
 
     alert("Por favor, preencha os dados corretamente.");
   }
@@ -338,7 +369,7 @@ function conferePerguntas() {
 
 function displayCriaNiveis() {
   conteudo.innerHTML = `<div class="criacaoQuizz">
-    <h2><span>Agora, decida os níveis!</span></h2>
+    <h2 class="comeceDoComeco"><span>Agora, decida os níveis!</span></h2>
     <div class="secaoToda">
     </div>
 
@@ -409,7 +440,7 @@ function confereNiveis() {
   let acertoMinIsCorrect = true;
 
   for (let acerto of acertoMin) {
-    if (isNaN(acerto.value) || acerto.value < 0 || acerto.value >= 100) {
+    if (isNaN(acerto.value) || acerto.value < 0 || acerto.value > 100) {
       acertoMinIsCorrect = false;
     }
   }
@@ -428,11 +459,20 @@ function confereNiveis() {
     if (descricao.value.length < 30) descricaoNivelIsCorrect = false;
   }
 
+  // confere url
+  let urlLevelIsCorrect = true;
+
+  for (let url of urlImagemNivel) {
+    if (!ValidURL(url.value)) urlLevelIsCorrect = false;
+    console.log(ValidURL(url.value));
+  }
+
   if (
     tituloNivelIsCorrect &&
     acertoMinIsCorrect &&
     acertoMinZeroIsCorrect &&
-    descricaoNivelIsCorrect
+    descricaoNivelIsCorrect &&
+    urlLevelIsCorrect
   ) {
     console.log("tudo Certinho");
 
@@ -495,15 +535,21 @@ function verificarQuizDoUsuario() {
   return JSON.parse(localStorage.getItem("quizUsuario"));
 }
 
-function displaySucessoDoQuizz(id) {
+function displaySucessoDoQuizz(data) {
   conteudo.innerHTML = `<div class="criacaoQuizz">
     <h2><span>Seu quizz está pronto!</span></h2>
     <div class="secaoToda">
 
-    <div class="imagemDoQuizz">
+    <div class="caixa-quiz" onclick="localizarQuiz(${data.id})">
+      <div class="caixa-imagem">
+        <img class="imagem-quiz" src="${data.image}" alt="">
+        <div class="gradiente"></div>
+      </div>
+      <div class="titulo">${data.title}</div>
+    </div>
     
     </div>
-    <button onclick="localizarQuiz(${id})">
+    <button onclick="localizarQuiz(${data.id})">
          Acessa quizz
         </button>
         <div class="caixaVoltarPraHome" onclick="voltarHome()"><span class="voltarPraHome">Voltar pra home</span> </div>
@@ -528,6 +574,11 @@ function isHexColor(hex) {
 }
 
 // Testeeeeee
+
+// qtdPerguntasQuizz = 3;
+// qtdNiveisQuizz = 2;
+
+// displayCriaNiveis();
 
 // Código real
 
