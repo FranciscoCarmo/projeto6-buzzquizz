@@ -525,7 +525,7 @@ function guardarQuizUsuario(resposta) {
     idUsuario.push(resposta);
     localStorage.setItem("quizUsuario", JSON.stringify(idUsuario));
   }
-  displaySucessoDoQuizz(resposta.data.id);
+  displaySucessoDoQuizz(resposta.data);
 }
 
 function verificarQuizDoUsuario() {
