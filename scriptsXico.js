@@ -49,7 +49,7 @@ function displayCriaInformacoesBasicas() {
         placeholder="Título do seu quizz"
       />
       <div class="caixaErro"> 
-      <p class="erro hidden">Errouuuuu</p>
+      <p class="erro hidden"></p>
       </div>
       <input
         class="urlImagemQuizz"
