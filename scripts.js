@@ -14,6 +14,8 @@ let level;
 let identificador;
 let userQuiz = localStorage.getItem("quizUsuario");
 let arrayUsuario = [];
+let botaoTemplate;
+let user;
 
 quizzesDoUsuario();
 
@@ -39,19 +41,23 @@ function quizzesDoUsuario() {
     promise.then(listarQuizzesUsuario)
   }
 
-
+  botaoTemplate =`<div class="lista">
+  <div class ="topo-quizes-user"> <h3>Seus Quizes</h3>
+  <ion-icon name="add-circle" onclick="displayCriaInformacoesBasicas()">
+  </ion-icon></div><div class="lista-usuario">`
+  conteudo.innerHTML = `${botaoTemplate}`;
+  
 }
 
 function listarQuizzesUsuario(resposta) {
 
   arrayUsuario.push(resposta.data)
   console.log(arrayUsuario);
-  for (let i = 0; i < arrayUsuario.length; i++) {
-    let botaoTemplate = `<div class="lista-usuario">
-   <div class ="topo-quizes-user"> <h3>Seus Quizes</h3>
-   <ion-icon name="add-circle" onclick="displayCriaInformacoesBasicas()"></ion-icon></div>
   
-  <div class="quiz-usuario">
+  user  = document.querySelector('.lista-usuario')
+  for (let i = 0; i < arrayUsuario.length; i++) {
+   let usuarioTemplate = `
+    <div class="quiz-usuario">
     <div class="caixa-quiz" onclick="localizarQuiz(${arrayUsuario[i].id})">
       <div class="caixa-imagem">
         <img class="imagem-quiz" src="${arrayUsuario[i].image}" alt="">
@@ -60,9 +66,10 @@ function listarQuizzesUsuario(resposta) {
       <div class="titulo">${arrayUsuario[i].title}</div>
     </div>
   `
-    conteudo.innerHTML += `${botaoTemplate}`;
+  console.log(usuarioTemplate)
+    user.innerHTML += `${usuarioTemplate}`;
   }
-  conteudo.innerHTML += `</div></div>
+  conteudo.innerHTML += `</div></div></div>
   <div class="quizes">
     <h2>Todos os Quizes</h2>
     <div class="todos-quizes"></div>
@@ -81,15 +88,16 @@ function exibirQuizzes(resposta) {
   quizzes = {};
   quizzes = resposta.data;
 
+  let quizzesGerais = quizzes.filter(varreAPI);
   for (let i = 0; i < quizzes.length; i++) {
 
-    idQuiz.push(quizzes[i].id);
+    idQuiz.push(quizzesGerais[i].id);
 
     const quizTemplate = `<div class = "caixa-quiz" onclick="localizarQuiz(${idQuiz[i]})">
         <div class="caixa-imagem">
-        <img class ="imagem-quiz" src="${quizzes[i].image}" alt="">
+        <img class ="imagem-quiz" src="${quizzesGerais[i].image}" alt="">
         <div class="gradiente"></div></div>
-        <div class="titulo">${quizzes[i].title}</div>
+        <div class="titulo">${quizzesGerais[i].title}</div>
         `;
 
     todosQuizes.innerHTML += `${quizTemplate}`;
@@ -99,8 +107,10 @@ function exibirQuizzes(resposta) {
 }
 
 function varreAPI() {
-  for (let i = 0; i < quizzes.length; i++) {
-    quizzes
+  
+  for (let i = 0; i < arrayUsuario.length; i++) {
+    quizzes.id !== arrayUsuario[i].id
+    return quizzes;
   }
 }
 
