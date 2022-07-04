@@ -17,15 +17,16 @@ let arrayUsuario = [];
 let botaoTemplate;
 let user;
 let listaUsuario;
+let play;
 
 quizzesDoUsuario();
 
 
 function quizzesDoUsuario() {
-  conteudo.innerHTML = "";
+  conteudo.innerHTML = `<div class = "play"></div>`;
 
   listaUsuario = JSON.parse(userQuiz);
-
+  play = document.querySelector('.play')
   if (userQuiz === null) {
     let botaoTemplate = `<div class="botao-criar-quiz">
     <p>Você não criou nenhum <br> quizz ainda :(</p>
@@ -33,7 +34,7 @@ function quizzesDoUsuario() {
     </div>
     <div class="quizes"><h2>Todos os Quizes</h2>
     <div class = "todos-quizes"></div></div>`;
-    conteudo.innerHTML += `${botaoTemplate}`;
+    play.innerHTML += `${botaoTemplate}`;
     obterQuizz();
   }
 
@@ -46,7 +47,7 @@ function quizzesDoUsuario() {
   <div class ="topo-quizes-user"> <h3>Seus Quizes</h3>
   <ion-icon name="add-circle" onclick="displayCriaInformacoesBasicas()">
   </ion-icon></div><div class="lista-usuario">`
-  conteudo.innerHTML = `${botaoTemplate}`;
+  play.innerHTML += `${botaoTemplate}`;
 
 }
 
@@ -75,7 +76,7 @@ function listarQuizzesUsuario() {
 
     user.innerHTML += `${usuarioTemplate}`;
   }
-  conteudo.innerHTML += `</div></div></div>
+  play.innerHTML += `</div></div></div>
   <div class="quizes">
     <h2>Todos os Quizes</h2>
     <div class="todos-quizes"></div>
@@ -97,7 +98,7 @@ function verificarQuizzes(resposta) {
   for (let i = 0; i < quizzes.length; i++) {
 
     let repetido = false;
-    
+
     for (let j = 0; j < arrayUsuario.length; j++) {
       if (quizzes[i].id === arrayUsuario[j].id) {
         repetido = true;
@@ -151,11 +152,12 @@ function abrirQuiz(response) {
 
   /*  Gerando titulo do Quiz */
 
-  const tituloQuiz = `<div class="titulo-quiz">
+  const tituloQuiz = `
+  <div class="titulo-quiz">
     <p>${quiz.title}</p>
     <img class="img-titulo" src="${quiz.image}" alt="">
     <div class="sombra"></div>
-   </div>`;
+   </div><div class = "play"></div>`;
 
   conteudo.innerHTML += tituloQuiz;
 
@@ -188,9 +190,10 @@ function abrirQuiz(response) {
 
     }
     caixaPerguntastemplate += `</div></div>`
-    conteudo.innerHTML += caixaPerguntastemplate;
+    document.querySelector('.play').innerHTML += caixaPerguntastemplate;
     setTimeout(perguntaSeguinte, 2000);
   }
+  /* caixaPerguntastemplate += `</div>` */
 }
 
 function embaralhar() {

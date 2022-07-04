@@ -66,7 +66,7 @@ h1:hover {
 }
 
 .quizes,
-.lista{
+.lista {
   width: 1051px;
   margin: 0 auto;
 }
@@ -81,12 +81,10 @@ h1:hover {
   position: relative;
   width: 340px;
   height: 181px;
-  background-image: linear-gradient(
-      180deg,
+  background-image: linear-gradient(180deg,
       rgba(255, 255, 255, 0) 0%,
       rgba(0, 0, 0, 0.5) 64.58%,
-      #000000 100%
-    ),
+      #000000 100%),
     url();
   border-radius: 5px;
   margin: 12px 10px 12px 0px;
@@ -106,12 +104,10 @@ h1:hover {
   border-radius: 5px;
   width: 340px;
   height: 181px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(0, 0, 0, 0.5) 64.58%,
-    #000000 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.5) 64.58%,
+      #000000 100%);
   position: absolute;
   top: 0;
   left: 0;
@@ -164,14 +160,22 @@ h1:hover {
 
 @media (max-width: 1100px) {
   .conteudo {
+    width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+  }
+  .play {
     width: 375px;
     margin: 0 auto;
-    margin-top: 70px;
+
     display: flex;
     flex-direction: column;
   }
 
-  .quizes {
+  .quizes,
+  .lista {
     width: 100%;
     display: initial;
     margin: 0 auto;
@@ -208,6 +212,10 @@ h1:hover {
     flex-direction: column;
     align-items: center;
   }
+
+  .lista {
+    margin-top: 70px;
+  }
 }
 
 /* layout pagina 2 */
@@ -215,8 +223,7 @@ h1:hover {
   width: 100%;
   height: 227px;
   position: relative;
-  top: 0px;
-  left: 0;
+  margin: 0;
   background-color: crimson;
   display: flex;
   align-items: center;
@@ -311,9 +318,7 @@ h1:hover {
   filter: opacity(50%);
 }
 
-.caixa-pergunta:not(.fechada)
-  .container-respostas
-  .caixa-respostas:not(.certa) {
+.caixa-pergunta:not(.fechada) .container-respostas .caixa-respostas:not(.certa) {
   color: red;
 }
 
@@ -396,6 +401,7 @@ h1:hover {
 }
 
 @media (max-width: 1100px) {
+
   .caixa-pergunta,
   .tela-level {
     width: 350px;
@@ -491,5 +497,8 @@ h1:hover {
 
   .perguntaCaixa {
     height: 90px;
+  }
+  .titulo-quiz {
+    margin-top:70px;
   }
 }
