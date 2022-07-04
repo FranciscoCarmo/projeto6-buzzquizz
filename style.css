@@ -81,10 +81,12 @@ h1:hover {
   position: relative;
   width: 340px;
   height: 181px;
-  background-image: linear-gradient(180deg,
+  background-image: linear-gradient(
+      180deg,
       rgba(255, 255, 255, 0) 0%,
       rgba(0, 0, 0, 0.5) 64.58%,
-      #000000 100%),
+      #000000 100%
+    ),
     url();
   border-radius: 5px;
   margin: 12px 10px 12px 0px;
@@ -104,10 +106,12 @@ h1:hover {
   border-radius: 5px;
   width: 340px;
   height: 181px;
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(0, 0, 0, 0.5) 64.58%,
-      #000000 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.5) 64.58%,
+    #000000 100%
+  );
   position: absolute;
   top: 0;
   left: 0;
@@ -121,6 +125,23 @@ h1:hover {
   font-size: 19px;
   line-height: 22px;
   color: #ffffff;
+}
+
+.titulo-quiz {
+  margin-top: 70px;
+}
+
+.titulo-quiz p {
+  font-weight: 400;
+  font-size: 39px;
+  line-height: 46px;
+  color: #ffffff;
+  position: absolute;
+  z-index: 1;
+  width: 80%;
+
+  text-align: center;
+  word-break: break-all;
 }
 
 .botao-criar-quiz {
@@ -184,7 +205,6 @@ h1:hover {
   .botao-criar-quiz {
     width: 95%;
     height: 181px;
-      
   }
 
   .caixa-quiz {
@@ -224,6 +244,8 @@ h1:hover {
   height: 227px;
   position: relative;
   margin: 0;
+  margin-top: 70px;
+
   background-color: crimson;
   display: flex;
   align-items: center;
@@ -319,7 +341,9 @@ h1:hover {
   filter: opacity(50%);
 }
 
-.caixa-pergunta:not(.fechada) .container-respostas .caixa-respostas:not(.certa) {
+.caixa-pergunta:not(.fechada)
+  .container-respostas
+  .caixa-respostas:not(.certa) {
   color: red;
 }
 
@@ -352,11 +376,13 @@ h1:hover {
   font-size: 23px;
   line-height: 27px;
   color: #ffffff;
+
+  padding: 0 40px;
 }
 
 .caixa-level {
   display: flex;
-  
+
   margin: 18px auto 0 auto;
 }
 
@@ -405,7 +431,6 @@ h1:hover {
 }
 
 @media (max-width: 1100px) {
-
   .caixa-pergunta,
   .tela-level {
     width: 350px;
@@ -423,7 +448,7 @@ h1:hover {
 
   .caixa-level div {
     width: 340px;
-    height: 255px;
+    /* height: 255px; */
     margin: 10px auto;
   }
 
@@ -447,6 +472,7 @@ h1:hover {
     line-height: 22px;
     text-align: center;
     margin: 0 auto;
+    word-break: break-all;
   }
 
   .pergunta {
@@ -503,6 +529,6 @@ h1:hover {
     height: 90px;
   }
   .titulo-quiz {
-    margin-top:70px;
+    margin-top: 70px;
   }
 }

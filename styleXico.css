@@ -21,6 +21,15 @@
   margin-left: 0;
 }
 
+.comeceDoComeco {
+  margin-top: 70px;
+  font-size: 23px !important;
+  display: flex !important;
+  align-self: center;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .secaoForms {
   display: flex;
   flex-direction: column;
@@ -54,6 +63,21 @@
   border-radius: 5px;
   padding-left: 10px;
   padding-top: 0;
+}
+
+.criacaoQuizz .caixa-quiz {
+  width: 340px;
+  height: 181px;
+}
+
+.criacaoQuizz .caixa-quiz img {
+  width: 100%;
+  height: 100%;
+}
+
+.criacaoQuizz .caixa-quiz .gradiente {
+  width: 100%;
+  height: 100%;
 }
 
 .criacaoQuizz input::placeholder {
@@ -222,6 +246,11 @@
     width: 370px;
 
     font-size: 21px;
+  }
+
+  .criacaoQuizz .caixa-quiz {
+    width: 500px;
+    height: 266px;
   }
 
   .unidadePergunta {
