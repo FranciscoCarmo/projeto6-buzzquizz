@@ -96,6 +96,15 @@
   align-items: center;
 
   max-width: 600px;
+  max-height: 2000px;
+  overflow: hidden;
+  transition: max-height 1s ease-in-out;
+}
+
+.unidadePergunta {
+  max-height: 2000px;
+  overflow: hidden;
+  transition: max-height 0.15s ease-in-out;
 }
 
 .pergunta {
@@ -118,7 +127,8 @@
 }
 
 .barra .secaoPergunta {
-  display: none;
+  max-height: 0;
+  pointer-events: none;
 }
 
 .criacaoQuizz h3 {
@@ -174,7 +184,8 @@
 }
 
 .hidden {
-  display: none;
+  max-height: 0;
+  pointer-events: none;
 }
 
 @media (min-width: 1100px) {
