@@ -12,17 +12,18 @@ let perguntas;
 let quiz;
 let level;
 let identificador;
-let userQuiz= localStorage.getItem("quizzesDoUsuario");
+let userQuiz = localStorage.getItem("quizUsuario");
 let arrayUsuario = [];
 
 quizzesDoUsuario();
 
 
 function quizzesDoUsuario() {
-  console.log(userQuiz)
-  let listaUsuario = JSON.parse (userQuiz);
-  console.log(listaUsuario)
-  if (userQuiz===null) {
+  conteudo.innerHTML = "";
+
+  let listaUsuario = JSON.parse(userQuiz);
+
+  if (userQuiz === null) {
     let botaoTemplate = `<div class="botao-criar-quiz">
     <p>Você não criou nenhum <br> quizz ainda :(</p>
     <button onclick="displayCriaInformacoesBasicas()">Criar Quizz</button>
@@ -32,21 +33,23 @@ function quizzesDoUsuario() {
     conteudo.innerHTML += `${botaoTemplate}`;
     obterQuizz();
   }
-  for (let i =0; i< listaUsuario.length; i++){
-   let  promise = axios.get(`${urlAPI}/${listaUsuario[i]}`);
-   promise.then(listarQuizzesUsuario)
+
+  for (let i = 0; i < listaUsuario.length; i++) {
+    let promise = axios.get(`${urlAPI}/${listaUsuario[i].data.id}`);
+    promise.then(listarQuizzesUsuario)
   }
 
 
-  
 }
-function listarQuizzesUsuario (resposta){
- 
+
+function listarQuizzesUsuario(resposta) {
+
   arrayUsuario.push(resposta.data)
   console.log(arrayUsuario);
-  for (let i=0; i<arrayUsuario.length; i++){
-    let botaoTemplate =   `<div class="lista-usuario">
-    <button onclick="displayCriaInformacoesBasicas()">Criar Quizz</button>
+  for (let i = 0; i < arrayUsuario.length; i++) {
+    let botaoTemplate = `<div class="lista-usuario">
+   <div class ="topo-quizes-user"> <h3>Seus Quizes</h3>
+   <ion-icon name="add-circle" onclick="displayCriaInformacoesBasicas()"></ion-icon></div>
   
   <div class="quiz-usuario">
     <div class="caixa-quiz" onclick="localizarQuiz(${arrayUsuario[i].id})">
@@ -57,9 +60,9 @@ function listarQuizzesUsuario (resposta){
       <div class="titulo">${arrayUsuario[i].title}</div>
     </div>
   `
-  conteudo.innerHTML += `${botaoTemplate}`;
+    conteudo.innerHTML += `${botaoTemplate}`;
   }
-  conteudo.innerHTML+= `</div></div>
+  conteudo.innerHTML += `</div></div>
   <div class="quizes">
     <h2>Todos os Quizes</h2>
     <div class="todos-quizes"></div>
@@ -79,6 +82,7 @@ function exibirQuizzes(resposta) {
   quizzes = resposta.data;
 
   for (let i = 0; i < quizzes.length; i++) {
+
     idQuiz.push(quizzes[i].id);
 
     const quizTemplate = `<div class = "caixa-quiz" onclick="localizarQuiz(${idQuiz[i]})">
@@ -92,6 +96,12 @@ function exibirQuizzes(resposta) {
 
   }
   todosQuizes.innerHTML += `</div></div>`
+}
+
+function varreAPI() {
+  for (let i = 0; i < quizzes.length; i++) {
+    quizzes
+  }
 }
 
 function localizarQuiz(id) {
@@ -247,8 +257,4 @@ function exibirPontuacao() {
 function reiniciarQuiz() {
   document.querySelector("header").scrollIntoView();
   setTimeout(localizarQuiz(identificador), 1000)
-}
-
-function voltarHome() {
-  document.location.reload(true)
 }

@@ -14,9 +14,14 @@ button {
 header {
   background-color: #ec362d;
   height: 69px;
-  width: 100%;
+  width: 100vw;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: 0 auto;
+  position: fixed;
+  top: 0px;
+
+  z-index: 1;
+
 }
 
 h1 {
@@ -28,16 +33,8 @@ h1 {
   padding: 13px 0;
 }
 
-h1 {
-  font-weight: 700;
-  font-size: 37px;
-  line-height: 43px;
-  color: #ffff;
-  text-align: center;
-  padding: 13px 0;
-}
 
-h2{
+h2 {
   display: flex;
   justify-content: space-between;
   margin: 0px auto;
@@ -46,14 +43,41 @@ h2{
   line-height: 23px;
   color: #000000;
 }
-.quizes{
+
+h3 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.topo-quizes-user {
+  display: flex;
+  margin: 139px auto 0 auto;
+  align-items: center;
+
+}
+
+.topo-quizes-user ion-icon {
+  color: #ff0000;
+  font-size: 33px;
+}
+
+ion-icon:hover,
+h1:hover {
+  cursor: pointer
+}
+
+.quizes,
+.lista-usuario {
   width: 1051px;
   margin: 0 auto;
 }
+
 .todos-quizes {
   display: flex;
   flex-wrap: wrap;
- 
+
 }
 
 .caixa-quiz {
@@ -164,8 +188,15 @@ h2{
   .gradiente {
     width: 100%;
   }
-  h2 {
+
+  h2,
+  h3 {
     width: 95%;
+  }
+
+  .todos-quizes,
+  .quiz-usuario {
+    width: 95%
   }
 
 }
@@ -233,6 +264,7 @@ h2{
   align-items: center;
   justify-content: center;
   color: #ffffff;
+  text-align: center;
 }
 
 .container-respostas {
@@ -357,7 +389,7 @@ h2{
 
   .caixa-pergunta,
   .tela-level {
-    width: 95%;
+    width: 350px;
 
   }
 
@@ -371,11 +403,13 @@ h2{
     height: 255px;
     margin: 10px auto;
   }
+
   .caixa-level p {
-        font-size: initial;
+    font-size: initial;
     line-height: initial;
     margin-bottom: 30px;
   }
+
   .caixa-level img {
     width: 340px;
     height: 255px;
@@ -391,7 +425,7 @@ h2{
     line-height: 22px;
     text-align: center;
     margin: 0 auto;
-color: #0594b8;
+
   }
 
   .pergunta {
@@ -399,17 +433,22 @@ color: #0594b8;
     height: 89px;
   }
 
+  .container-respostas {
+    width: 100%;
+  }
 
-  .titulo-quiz p {
+  .titulo-quiz p,
+  .titulo-level p {
     font-weight: 400;
     font-size: 19px;
     line-height: 22px;
+    word-break: break-word;
   }
 
   .caixa-respostas {
     width: 164px;
     height: 113px;
-    margin : 0 10px 0 0;
+    margin: 0px 10px 40px 0;
 
   }
 
@@ -418,7 +457,18 @@ color: #0594b8;
     font-size: 13px;
     line-height: 15px;
   }
+
   .finalizar {
     margin: 50px;
+  }
+  .lista-usuario {
+    width: 95%;
+    display: initial;
+    margin: 0px auto;
+  }
+  .topo-quizes-user {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
   }
 }

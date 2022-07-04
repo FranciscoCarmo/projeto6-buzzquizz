@@ -490,10 +490,10 @@ function guardarQuizUsuario(resposta) {
 }
 
 function verificarQuizDoUsuario() {
-  if (!localStorage.getItem("quizDoUsuario")) {
+  if (!localStorage.getItem("quizUsuario")) {
     return [];
   }
-  return JSON.parse(localStorage.getItem("quizDoUsuario"));
+  return JSON.parse(localStorage.getItem("quizUsuario"));
 }
 
 function displaySucessoDoQuizz(id) {
@@ -517,9 +517,8 @@ function displaySucessoDoQuizz(id) {
 
 function voltarHome() {
   conteudo.innerHTML = ``;
-
-  quizzesDoUsuario();
-  obterQuizz();
+window.location.reload();
+  
 }
 
 function isHexColor(hex) {
