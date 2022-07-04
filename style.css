@@ -126,7 +126,7 @@ h1:hover {
 .botao-criar-quiz {
   width: 1051px;
   height: 181px;
-  margin: 107px auto;
+  margin: 100px auto;
   background: #fafafa;
   border: 1px dashed #d5d5d5;
   border-radius: 5px;
@@ -184,7 +184,7 @@ h1:hover {
   .botao-criar-quiz {
     width: 95%;
     height: 181px;
-    margin: 33px auto;
+      
   }
 
   .caixa-quiz {
