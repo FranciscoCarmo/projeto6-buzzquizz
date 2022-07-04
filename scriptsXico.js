@@ -48,21 +48,35 @@ function displayCriaInformacoesBasicas() {
         type="text"
         placeholder="Título do seu quizz"
       />
+      <div class="caixaErro"> 
+      <p class="erro hidden">Errouuuuu</p>
+      </div>
       <input
         class="urlImagemQuizz"
         type="text"
         placeholder="URL da imagem do seu quizz"
       />
+      <div class="caixaErro"> 
+      <p class="erro hidden"></p>
+      </div>
+
       <input
         class="qtdPerguntasQuizz"
         type="text"
         placeholder="Quantidade de perguntas do quizz"
       />
+      <div class="caixaErro">
+      <p class="erro hidden"></p>
+      </div>
+
       <input
         class="qtdNiveisQuizz"
         type="text"
         placeholder="Quantidade de níveis do quizz"
       />
+      <div class="caixaErro"> 
+      <p class="erro hidden"></p>
+      </div>
     </div>
     <button onclick="confereInformacoesBasicasEAdicionaNoObjetoQuizz()" >Prossegir pra criar perguntas</button>
   </div>
@@ -105,7 +119,32 @@ function confereInformacoesBasicasEAdicionaNoObjetoQuizz() {
     displayCriaPerguntas();
   } else {
     alert("Por favor, preencha os dados corretamente.");
+
+    //Se acertar o campo
+    if (TitleIsCorrect) removeError(0);
+    if (urlIsCorrect) removeError(1);
+    if (qtdPerguntasIsCorrect) removeError(2);
+    if (qtdNiveisIsCorrect) removeError(3);
+
+    //Se errar o campo
+    if (!TitleIsCorrect) displayErro(0);
+    if (!urlIsCorrect) displayErro(1);
+    if (!qtdPerguntasIsCorrect) displayErro(2);
+    if (!qtdNiveisIsCorrect) displayErro(3);
   }
+}
+
+function displayErro(index, frase = "Preencha corretamente este campo") {
+  let erro = document.querySelectorAll(".erro");
+
+  erro[index].innerHTML = frase;
+  erro[index].classList.remove("hidden");
+}
+
+function removeError(index) {
+  let erro = document.querySelectorAll(".erro");
+
+  erro[index].classList.add("hidden");
 }
 
 function displayCriaPerguntas() {
@@ -363,6 +402,21 @@ function conferePerguntas() {
     console.log(urlCorretaIsCorrect);
     console.log(urlIncorretaIsCorrect);
 
+    // //Se acertar o campo
+    // if (textoIsCorrect) removeError(0);
+    // if (corIsCorrect) removeError(1);
+    // if (respostaCorretaIsCorrect) removeError(2);
+    // if (respostaIncorretaIsCorrect) removeError(3);
+    // if (urlCorretaIsCorrect) removeError(3);
+    // if (urlIncorretaIsCorrect) removeError(3);
+
+    // //Se errar o campo
+    // if (!textoIsCorrect) displayErro(0);
+    // if (!corIsCorrect) displayErro(1);
+    // if (!respostaCorretaIsCorrect) displayErro(2);
+    // if (!urlCorretaIsCorrect) displayErro(3);
+    // if (!respostaIncorretaIsCorrect) displayErro(3);
+    // if (!urlIncorretaIsCorrect) displayErro(3);
     alert("Por favor, preencha os dados corretamente.");
   }
 }
