@@ -356,7 +356,7 @@ h1:hover {
 
 .caixa-level {
   display: flex;
-  flex-direction: column;
+  
   margin: 18px auto 0 auto;
 }
 
