@@ -11,11 +11,13 @@ let qtdNiveisQuizz = 0;
 let pergunta = {
   title: "Título da pergunta 1",
   color: "#123456",
-  answers: [{
-    text: "Texto da resposta 1",
-    image: "https://http.cat/411.jpg",
-    isCorrectAnswer: true,
-  }, ],
+  answers: [
+    {
+      text: "Texto da resposta 1",
+      image: "https://http.cat/411.jpg",
+      isCorrectAnswer: true,
+    },
+  ],
 };
 
 let umaResposta = {
@@ -38,7 +40,7 @@ function displayCriaInformacoesBasicas() {
 
   conteudo.innerHTML = `
     <div class="criacaoQuizz">
-    <h2 class:><span>Comece pelo começo</span></h2>
+    <h2> Comece pelo começo</h2>
 
     <div class="secaoForms">
       <input
@@ -271,11 +273,13 @@ function conferePerguntas() {
       pergunta = {
         title: "Título da pergunta 1",
         color: "#123456",
-        answers: [{
-          text: "Texto da resposta 1",
-          image: "https://http.cat/411.jpg",
-          isCorrectAnswer: true,
-        }, ],
+        answers: [
+          {
+            text: "Texto da resposta 1",
+            image: "https://http.cat/411.jpg",
+            isCorrectAnswer: true,
+          },
+        ],
       };
 
       umaResposta = {
@@ -306,13 +310,13 @@ function conferePerguntas() {
           console.log("objeto resposta  --" + umaResposta.text);
 
           pergunta.answers.push({
-            ...umaResposta
+            ...umaResposta,
           });
         }
       }
 
       quizz.questions.push({
-        ...pergunta
+        ...pergunta,
       });
     }
 
@@ -446,7 +450,7 @@ function confereNiveis() {
       levelCriar.minValue = acertoMin[i].value;
 
       quizz.levels.push({
-        ...levelCriar
+        ...levelCriar,
       });
     }
 
@@ -472,12 +476,7 @@ function enviaQuizzAPI() {
   promisse.then(guardarQuizUsuario);
 }
 
-
-
-
-
 function guardarQuizUsuario(resposta) {
-
   if (verificarQuizDoUsuario().length === 0) {
     idUsuario = JSON.stringify([resposta]);
     localStorage.setItem("quizUsuario", idUsuario);
@@ -486,7 +485,7 @@ function guardarQuizUsuario(resposta) {
     idUsuario.push(resposta);
     localStorage.setItem("quizUsuario", JSON.stringify(idUsuario));
   }
-  displaySucessoDoQuizz((resposta.data.id))
+  displaySucessoDoQuizz(resposta.data.id);
 }
 
 function verificarQuizDoUsuario() {
@@ -511,14 +510,11 @@ function displaySucessoDoQuizz(id) {
         </div>
       </div>
 </div>`;
-
-
 }
 
 function voltarHome() {
   conteudo.innerHTML = ``;
-window.location.reload();
-  
+  window.location.reload();
 }
 
 function isHexColor(hex) {
