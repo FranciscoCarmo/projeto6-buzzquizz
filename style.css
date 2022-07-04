@@ -21,7 +21,6 @@ header {
   top: 0px;
 
   z-index: 1;
-
 }
 
 h1 {
@@ -32,7 +31,6 @@ h1 {
   text-align: center;
   padding: 13px 0;
 }
-
 
 h2 {
   display: flex;
@@ -55,7 +53,6 @@ h3 {
   display: flex;
   margin: 139px auto 0 auto;
   align-items: center;
-
 }
 
 .topo-quizes-user ion-icon {
@@ -65,7 +62,7 @@ h3 {
 
 ion-icon:hover,
 h1:hover {
-  cursor: pointer
+  cursor: pointer;
 }
 
 .quizes,
@@ -77,17 +74,18 @@ h1:hover {
 .todos-quizes {
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .caixa-quiz {
   position: relative;
   width: 340px;
   height: 181px;
-  background-image: linear-gradient(180deg,
+  background-image: linear-gradient(
+      180deg,
       rgba(255, 255, 255, 0) 0%,
       rgba(0, 0, 0, 0.5) 64.58%,
-      #000000 100%),
+      #000000 100%
+    ),
     url();
   border-radius: 5px;
   margin: 12px 10px 12px 0px;
@@ -107,10 +105,12 @@ h1:hover {
   border-radius: 5px;
   width: 340px;
   height: 181px;
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(0, 0, 0, 0.5) 64.58%,
-      #000000 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.5) 64.58%,
+    #000000 100%
+  );
   position: absolute;
   top: 0;
   left: 0;
@@ -163,13 +163,15 @@ h1:hover {
 
 @media (max-width: 1100px) {
   .conteudo {
-    width: 100%;
+    width: 375px;
     margin: 0 auto;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
   }
 
-
   .quizes {
-    width: 95%;
+    width: 100%;
     display: initial;
     margin: 0 auto;
   }
@@ -182,7 +184,10 @@ h1:hover {
 
   .caixa-quiz {
     width: 95%;
-    margin: 13px auto;
+    margin: 7px auto;
+    margin-right: 0;
+    margin-left: 0;
+    /* margin: 7px 10px 7px 10px; */
   }
 
   .imagem-quiz,
@@ -197,9 +202,11 @@ h1:hover {
 
   .todos-quizes,
   .quiz-usuario {
-    width: 95%
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
 }
 
 /* layout pagina 2 */
@@ -238,13 +245,13 @@ h1:hover {
   height: 227px;
   top: 0;
   left: 0;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
 }
 
 .caixa-pergunta {
   width: 759px;
   word-wrap: break-word;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   margin: 42px auto 0 auto;
 
@@ -298,7 +305,9 @@ h1:hover {
   filter: opacity(50%);
 }
 
-.caixa-pergunta:not(.fechada) .container-respostas .caixa-respostas:not(.certa) {
+.caixa-pergunta:not(.fechada)
+  .container-respostas
+  .caixa-respostas:not(.certa) {
   color: red;
 }
 
@@ -309,7 +318,7 @@ h1:hover {
 .tela-level {
   width: 759px;
   height: 430px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   margin: 70px auto;
   word-wrap: break-word;
@@ -334,7 +343,6 @@ h1:hover {
 .caixa-level {
   display: flex;
   margin: 18px auto 0 auto;
-
 }
 
 .caixa-level img {
@@ -350,7 +358,6 @@ h1:hover {
   line-height: 25px;
   color: #484848;
   word-wrap: break-word;
-
 }
 
 .finalizar {
@@ -359,20 +366,18 @@ h1:hover {
   flex-direction: column;
   align-items: center;
   border: none;
-
 }
 
 .reiniciar {
   width: 260.38px;
   height: 52px;
-  background: #EC362D;
+  background: #ec362d;
   border-radius: 15px;
   font-weight: 400;
   font-size: 21px;
   line-height: 25px;
   border: none;
   color: #ffffff;
-
 }
 
 .home {
@@ -380,18 +385,19 @@ h1:hover {
   font-size: 21px;
   line-height: 25px;
   color: #818181;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border: none;
-
 }
 
-
-@media (max-width:1100px) {
-
+@media (max-width: 1100px) {
   .caixa-pergunta,
   .tela-level {
     width: 350px;
+  }
 
+  .caixa-imagem {
+    display: flex;
+    align-self: center;
   }
 
   .tela-level,
@@ -414,7 +420,6 @@ h1:hover {
   .caixa-level img {
     width: 340px;
     height: 255px;
-
   }
 
   .perguntaCaixa,
@@ -426,7 +431,6 @@ h1:hover {
     line-height: 22px;
     text-align: center;
     margin: 0 auto;
-
   }
 
   .pergunta {
@@ -450,7 +454,6 @@ h1:hover {
     width: 164px;
     height: 113px;
     margin: 0px 10px 40px 0;
-
   }
 
   .caixa-respostas p {
@@ -472,5 +475,4 @@ h1:hover {
     justify-content: space-between;
     width: 90%;
   }
-
 }
